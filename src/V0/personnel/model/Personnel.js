@@ -1,10 +1,9 @@
 const {Model, DataTypes} = require('sequelize')
-const Appointment = require('../../appointment/model/Appointment')
 const sequelize = require('../../repository/database')
 
-class Patient extends Model {}
+class Personnel extends Model {}
 
-Patient.init({
+Personnel.init({
     name:{
         type: DataTypes.STRING        
     },
@@ -19,15 +18,18 @@ Patient.init({
     },
     birthdate:{
         type:DataTypes.DATE
+    },
+    role:{
+        type:DataTypes.ENUM,
+        values: ['Doctor', 'LabTechnician', 'Receptionnist', 'Cashier']
+    },
+    personnel_number:{
+        type:DataTypes.BIGINT
     }
 }, {
     sequelize,
-    modelName: 'patient'
+    modelName: 'personnel'
 }
 )
 
-Patient.hasMany(Appointment)
-Appointment.belongsTo(Patient)
-Appointment.sync()
-
-module.exports = Patient
+module.exports = Personnel

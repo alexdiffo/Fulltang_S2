@@ -5,7 +5,7 @@ const port = 8080
 const IndexRouter= require('./src/V0/index.router')
 
 const sequelize = require('./src/V0/repository/database');
-sequelize.sync().then(()=>console.log('database is up and running!'))
+sequelize.sync({alter:true}, {force:true}).then(()=>console.log('database is up and running!'))
 .catch((err)=>{
     console.log('Error connecting database');
 })
