@@ -28,6 +28,6 @@ Patient.init({
 
 Patient.hasMany(Appointment)
 Appointment.belongsTo(Patient)
-Appointment.sync()
+//Appointment.sync()
 
 module.exports = Patient

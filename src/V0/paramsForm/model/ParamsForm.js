@@ -1,5 +1,5 @@
 const {Model, DataTypes} = require('sequelize')
-const Appointment = require('../../appointment/model/Appointment')
+
 const Personnel = require('../../personnel/model/Personnel')
 const sequelize = require('../../repository/database')
 
@@ -32,11 +32,10 @@ paramsForm.init({
 }
 )
 
-Appointment.hasOne(paramsForm)
-paramsForm.belongsTo(Appointment)
+
 Personnel.hasMany(paramsForm)
 paramsForm.belongsTo(Personnel)
-paramsForm.sync()
+//paramsForm.sync()
 
 module.exports = paramsForm
 
