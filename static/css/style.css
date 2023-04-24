@@ -1,0 +1,483 @@
+html{
+    scroll-behavior: smooth;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main{
+    display: flex;
+    font-family: system-ui, sans-serif;
+}
+.right-container{
+    flex-grow: 1;
+}
+header{
+    background: linear-gradient(45deg, #75b2cb, #56a7c9);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+.logo{
+    display: none;
+}
+
+.profil{
+    margin-right: 115px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
+.profil-image{
+    height: 45px;
+    width: 45px;
+    background: #7fb1e9;
+    border-radius: 50%;
+    border: solid 1px #ffffff;
+}
+.profil p{
+    margin-right: 15px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.left-bar{
+    width: 280px;
+    height: 100vh;
+    position: sticky;
+    transition: .2s;
+    top: 0;
+    left: 0;
+}
+.presentation{
+    height: 250px;
+    background: linear-gradient(90deg, #4ec3b8, #75b2cb);
+}
+.entete{
+    display: flex;
+    color: white;
+}
+.entete i{
+    display: none;
+    padding: 20px 15px;
+    cursor: pointer;
+}
+.app-name{
+    text-align: center;
+    font-size: 19px;
+    font-weight: 600;
+    padding: 15px;
+    flex-grow: 1;
+}
+.about{
+    padding: 20px 25px;
+    display: flex;
+}
+.welcome-image{
+    width: 70px;
+    height: 70px;
+    background-image: url("../image/avatar.jpg");
+    border-radius: 50%;
+    margin-right: 20px;
+    background-position: center;
+    background-size: cover;
+}
+.grade{
+    color: white;
+}
+
+.grade p:nth-child(1){
+    font-size: 14px;
+}
+.grade p:nth-child(2){
+    font-size: 16px;
+    font-weight: bold;
+}
+.outside a{
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.outside i{
+    padding-right: 5px;
+}
+.navigation{
+    background: #30373e;
+    height: calc(100vh - 250px);
+}
+.nav-title p{
+    padding: 10px;
+    color: white;
+    background: #363e46;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+.navigation ul{
+    list-style-type: none;
+}
+.navigation a{
+    text-decoration: none;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    color: #4ec3b8;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-top: solid 1px #393e44;
+    border-bottom: solid 1px #393e44;
+}
+.navigation a:hover{
+    background: #0088ff2e;
+    color: aliceblue;
+}
+.navigation i{
+    padding-right: 10px;
+}
+.section ul{
+    height: 0;
+    overflow: hidden;
+    transition: .4s;
+}
+ul.height{
+    height: 135px;
+}
+.section li a{
+    padding-left: 80px;
+}
+.content{
+    padding: 25px 50px;
+    background: #eeeeee;
+    min-height: calc(100vh - 70px);
+}
+.top-content{
+    border-bottom: solid 1px #c0bfbf;
+    padding-bottom: 20px;
+}
+.top-content p{
+    padding-bottom: 5px;
+}
+.welcome{
+    font-size: 13px;
+    color: #878787;
+}
+.page-title{
+    font-weight: 600;
+}
+.notification{
+    display: flex;
+    background: #b3f5bd;
+    border: solid 2px #639760;
+    padding: 15px 30px;
+    font-size: 17px;
+    margin-top: 25px;
+    font-weight: 600;
+    color: #235f15;
+}
+.notification p{
+    flex-grow: 1;
+}
+.notification i{
+    font-size: 22px;
+    cursor: pointer;
+}
+.search{
+    display: flex;
+    justify-content: end;
+    padding: 40px 0;
+}
+.search div{
+    display: flex;
+}
+.search input{
+    outline: none;
+    height: 43px;
+    border: solid 1px darkgrey;
+    padding: 0 10px 0 25px;
+    font-weight: 500;
+    width: 230px;
+    font-size: 14px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-right: none;
+}
+.search button{
+    height: 100%;
+    width: 60px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    cursor: pointer;
+    background: #59a8c9;
+    border: solid 1px darkgrey;
+    text-align: center;
+}
+.search i{
+    font-size: 20px;
+    color: white;
+    padding-right: 5px;
+}
+table,tr,td{
+    border-collapse: collapse;
+}
+.table{
+    width: 100%;
+}
+th{
+    text-align: left;
+}
+.table tr{
+    height: 55px;
+    padding-left: 10px;
+}
+tbody tr:nth-child(2n+1){
+    background: white;
+}
+.table td:first-child,.table th:first-child{
+    padding-left: 15px;
+}
+.table td:last-child{
+    max-width: 80px;
+}
+.table a{
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.tView{
+    color: #0d8531;
+}
+.tEdit{
+    color: #0363ca;
+    margin: 0 30px;
+}
+.tDel{
+    color: red;
+}
+.add{
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    padding-top: 20px;
+    width: 85%;
+    margin: auto;
+}
+.form-row{
+    display: flex;
+    gap: 35px;
+}
+.form-row div{
+    width: 50%;
+}
+.form-row label{
+    display: block;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 500;
+}
+input[type="date"], select{
+    cursor: pointer;
+}
+.add input , .add select{
+    height: 52px;
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    border: none;
+    background: #ffffff;
+    outline: solid 2px #cfcfcf;
+    padding: 0 30px;
+    font-weight: 500;
+    font-size: 15px;
+    color: black;
+}
+.focus:focus{
+    outline: solid #00b7f7;
+    background: #eef7ff;
+}
+.add select:invalid{
+        color: #757575;
+}
+.add input[type="submit"]{
+    background: linear-gradient(133deg, #00b8f9, #08e5ce);
+    margin: 36px 0;
+    cursor: pointer;
+    color: white;
+    font-size: 17px;
+    outline: none;
+    font-weight: bold;
+}
+.pagination{
+    display: flex;
+    justify-content: end;
+    padding: 50px 0;
+}
+.pagination button{
+    height: 40px;
+    width: 40px;
+    background: #0296ff;
+    border: navajowhite;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+.pagination p{
+    margin: 0 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+.basic-info{
+    max-width: 740px;
+    width: 85%;
+    margin: auto;
+    margin-top: 60px;
+    background: #f2feff;
+}
+.colonne-info{
+    display: flex;
+    padding: 18px 30px;
+}
+.colonne-info, .basic-info{
+    border: solid 1px #b1d1d7;
+}
+.colonne-info h2{
+    flex-grow: 2;
+    font-size: 16px;
+}
+.colonne-info p{
+    width: 45%;
+    color: #044750;
+}
+.maj-profil{
+    display: flex;
+    max-width: 740px;
+    width: 85%;
+    margin: 50px auto 50px auto;
+    gap: 50px;
+    
+}
+.maj-profil a{
+    height: 50px;
+    background: #5fbcc0;
+    flex-grow: 1;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+}
+.mWindow{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: #00000045;
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    display: none;
+    opacity: 0;
+    transition: .4s cubic-bezier(1, 0.3, 0.55, 1.01);
+}
+.modalBox{
+    background: white;
+    width: 95%;
+    max-width: 450px;
+    height: 175px;
+    border-radius: 10px;
+    padding: 28px;
+    text-align: center;
+    transform: translateY(-490px);
+    transition: .4s;
+}
+.modalBox p{
+    font-size: 18px;
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+.mDecision{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+.mDecision button{
+    border: none;
+    background: #61bac1;
+    height: 35px;
+    width: 110px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width:1200px) {
+
+.left-container{
+    transition: .2s;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+.visibles{
+    display: block;
+    background: #00000070;
+    backdrop-filter: blur(3px)
+}
+.entete i{
+    display: block;
+}
+.app-name{
+    flex-grow: 0;
+}
+.left-bar{
+    transform: translateX(-282px);
+}
+.translate{
+    transform: translateX(0);
+}
+.logo{
+    display: flex;
+}
+.logo i{
+    padding: 4px 20px;
+    cursor: pointer;
+}
+.title{
+    font-size: 18px;
+    font-weight: 500;
+}
+.profil{
+    margin-right: 35px;
+}
+    
+}

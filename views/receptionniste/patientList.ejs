@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>dashboard</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script  src='/js/script.js' defer></script>
+    <script  src='/js/pagination.js' defer></script>
+</head>
+<body>
+    <div class="main">
+        
+        <%- include("leftBar") %>
+
+        <div class="right-container">
+
+            <%- include("header") %>
+            
+            <div class="content">
+                <div class="top-content">
+                    <p class="welcome">
+                        Bienvenu à la polyclinique Fulltang
+                    </p>
+                    <p>
+                        Receptionniste profil
+                    </p>
+                    <p class="page-title">
+                        Liste des patients...
+                    </p>
+                    
+                </div>
+                <div class="patient-list">
+                    <% if(locals.message){ %>
+                        <div class="notification">
+                            <p>
+                                <%=message %>
+                            </p>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    <% } %>
+                    <div class="search">
+                        <div>
+                            <input type="text" placeholder="search" >
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                    <div class="tableBloc">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Sexe</th>
+                                    <th>Age</th>
+                                    <th>Service</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td>3</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td>5</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td>7</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td>9</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td>11</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td>13</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>NTSAMA</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td>
+                                        <a class="tView"><i class="fa-solid fa-eye "></i></a>
+                                        <a class="tEdit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td>16</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td>YAN</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>18</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td>21</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>22</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td>23</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>24</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td>25</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>26</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td>27</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>28</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td>29</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>30</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td>31</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>32</td>
+                                    <td>NTSAMA</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>33</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr> 
+                                <tr>
+                                    <td>34</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>35</td>
+                                    <td>YAN</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>36</td>
+                                    <td>TABETSING</td>
+                                    <td>Fabio</td>
+                                    <td>Masculin</td>
+                                    <td>19 ans</td>
+                                    <td>Spétialiste</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>37</td>
+                                    <td>DIFFO</td>
+                                    <td>Alex</td>
+                                    <td>Masculin</td>
+                                    <td>30 ans</td>
+                                    <td>Généraliste</td>
+                                    <td></td>
+                                </tr>
+                                 
+                                
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <button class="prev"><<</button>
+                            <p>
+                                page   
+                                <span class="n-page">1</span>/<span class="t-page"></span >
+                            </p>
+                            <button class="next">>></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mWindow" aria-hidden="true">
+                    <div class="modalBox">
+                            <p>Voulez vous vraiment supprimer le patient Mr/Mme <span></span> </p>
+                            <div class="mDecision">
+                                <form method="post">
+                                    <input type="hidden" name="id"/>
+                                    <button type="submit">OUI</button>
+                                </form>
+                                <button>NON</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+    </div>
+    
+</body>
+</html>
