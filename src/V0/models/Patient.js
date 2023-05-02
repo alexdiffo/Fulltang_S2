@@ -36,7 +36,4 @@ Patient.init({
 Consultation.belongsTo(Patient)
 Patient.hasMany(Consultation)
 
-Patient.belongsTo(Personnel)
-Personnel.hasMany(Patient)
-
 module.exports = Patient
