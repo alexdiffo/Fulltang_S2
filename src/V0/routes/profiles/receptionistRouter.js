@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Patient = require('../../models/Patient')
 const Personnel = require('../../models/Personnel')
-const Appointment= require('../../models/Appointment')
 
 router.use(express.json())
 
