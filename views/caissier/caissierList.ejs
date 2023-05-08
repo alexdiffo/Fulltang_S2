@@ -25,25 +25,16 @@
                         Bienvenu à la polyclinique Fulltang
                     </p>
                     <p>
-                        Receptionniste profil
+                        Caissier profil
                     </p>
                     <p class="page-title">
-                        Liste des patients...
+                        Liste des consultations...
                     </p>
-                    
                 </div>
                 <div class="patient-list">
-                    <% if(locals.message){ %>
-                        <div class="notification">
-                            <p>
-                                <%=message %>
-                            </p>
-                            <i class="fa-solid fa-xmark"></i>
-                        </div>
-                    <% } %>
                     <div class="search">
                         <div>
-                            <input type="text" placeholder="search" >
+                            <input type="text" placeholder="search">
                             <button><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
@@ -55,8 +46,8 @@
                                     <th>Nom</th>
                                     <th>Prénom</th>
                                     <th>Sexe</th>
-                                    <th>Téléphone</th>
-                                    <th>Adresse</th>
+                                    <th>service</th>
+                                    <th>montant</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -68,20 +59,16 @@
                                         <td><%=i.name%></td>
                                         <td><%=i.surname%></td>
                                         <td><%=i.sex%></td>
-                                        <td><%=i.phone%></td>
-                                        <td><%=i.address%></td>
+                                        <td>Géneraliste</td>
+                                        <td>2000 fcfa</td>
                                         
                                         <td>
-                                            <a class="tView" href=<%="/fulltang/V0/receptionnist/patient/"+i.id %> ><i class="fa-solid fa-eye "></i></a>
-                                            <a class="tEdit" href=<%="/fulltang/V0/receptionnist/edit/"+i.id %> ><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
-                                            <a class="tEdit" href=<%="/fulltang/V0/receptionnist/new_consultation/"+i.id %> ><i class="fa-solid fa-circle-plus"></i></a>
-
+                                            <a class="payement" href=<%="/fulltang/V0/cashier/payer/"+i.id %> >payement <i class="fa-solid fa-piggy-bank"></i></a>
+                                            
                                         </td>
                                     </tr>
                                 <% }) %>
                                 
-                               
                                  
                                 
                             </tbody>
@@ -98,10 +85,10 @@
                 </div>
                 <div class="mWindow" aria-hidden="true">
                     <div class="modalBox">
-                            <p>Voulez vous vraiment supprimer le patient Mr/Mme <span></span> </p>
+                            <p>Voulez vous vraiment supprimer le patient Mr/Mme</p>
                             <div class="mDecision">
                                 <form method="post">
-                                    <input type="hidden" name="id"/>
+                                    <input type="hidden"/>
                                     <button type="submit">OUI</button>
                                 </form>
                                 <button>NON</button>

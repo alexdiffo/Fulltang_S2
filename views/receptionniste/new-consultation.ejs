@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>dashboard</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script src='/js/script.js' defer></script>
+</head>
+<body>
+    <div class="main">
+        
+        <%- include("leftBar") %>
+
+        <div class="right-container">
+            
+            <%- include("header") %>
+
+            <div class="content">
+                <div class="top-content">
+                    <p class="welcome">
+                        Bienvenu à la polyclinique Fulltang
+                    </p>
+                    <p>
+                        Caissier profil
+                    </p>
+                    <p class="page-title">
+                        créer consultation...
+                    </p>
+                </div>
+                
+                <form class="form">
+                    <div class="formTitle">
+                            Mr/Mme 
+                            <%=patient.name+'  '+patient.surname %>
+                         
+                    </div>
+                    <div class="form-row">
+                        
+                        <div class="fWidth">
+                            <label>service</label>
+                            <select class="focus" required >
+                                <option selected disabled value="" style=" color: black ; font-weight: bold"></option>
+                                <option value="generaliste">Généraliste</option>
+                                <option value="Spétialiste">Spétialiste</option>
+                              
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        <div class="fWidth">
+                            <label>cout</label>
+                            <input class="focus" id="cout" disabled value="" type="number"  required/>
+
+                        </div>
+                    </div>
+                    
+                    <button type="submit">
+                        Valider 
+                        <i class="fa-solid fa-circle-check"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+         
+    </div>
+
+    <script>
+        var select=document.querySelector(".form-row select")
+        var cout=document.querySelector("#cout")
+        var form=document.querySelector(".form")
+
+        //changer le cout de consultation
+        select.addEventListener("change",function(){
+            if(select.selectedOptions[0].value=="generaliste" ){
+                cout.value="2000"
+            }else{
+                cout.value="5000"
+            }
+        })
+
+        //confirmer le payement
+        form.addEventListener("submit",function(e){
+            var decision= confirm("voulez vous vraiment confirmer ce payement?")
+            if(!decision){
+                e.preventDefault()
+            }
+        })
+
+
+    </script>
+    
+</body>
+</html>

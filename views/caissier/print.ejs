@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>dashboard</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media="screen" href='/css/style.css'>
+    <link rel='stylesheet' type='text/css' media='print' href='/css/print.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script src='/js/script.js' defer></script>
+</head>
+<body>
+    <div class="main">
+        
+        <%- include("leftBar") %>
+
+        <div class="right-container">
+            
+            <%- include("header") %>
+
+            <div class="content">
+                <div class="print">
+                    <div class="top-content">
+                        <p class="welcome">
+                            Bienvenu à la polyclinique Fulltang
+                        </p>
+                        <p>
+                           <strong>ID_FACTURE: </strong>  16166
+                        </p>
+                        <p>
+                            <strong>Date: </strong>   lundi le 12 2023
+                        </p>   
+                    </div>
+                    <div class="p-row">
+                        <h1>FACTURE DE CONSULTATION</h1>
+                    </div>
+                    <div class="p-row">
+                        <p>Nom & prenom</p>
+                        <p>DIFFO Alaex</p>
+                    </div>
+                    <div class="p-row">
+                        <p>Service</p>
+                        <p>Généraliste</p>
+                    </div>
+                    <div class="p-row">
+                        <p>Net a payer</p>
+                        <p><strong>2000 fcfa</strong></p>
+                    </div>
+                </div>  
+                <div class="p-div">
+                    <form method="post">
+                        <button onclick="window.print()">Imprimer <i class="fa-solid fa-print"></i></button>
+                    </form>  
+                </div>
+            </div>
+        </div>
+         
+    </div>
+    
+</body>
+</html>

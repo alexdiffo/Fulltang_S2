@@ -246,7 +246,7 @@ tbody tr:nth-child(2n+1){
     padding-left: 15px;
 }
 .table td:last-child{
-    max-width: 80px;
+   max-width: 110px;
 }
 .table a{
     text-decoration: none;
@@ -257,6 +257,25 @@ tbody tr:nth-child(2n+1){
 .tView{
     color: #0d8531;
 }
+a.payement{
+    color: white;
+    background: #18860d;
+    padding: 7px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+}
+a.payer{
+    color: white;
+    background: #18860d;
+    padding: 5px 11px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50px;
+    border: solid 5px white;
+    outline: solid 2px #eeeeee;
+    cursor: context-menu;
+}
 .tEdit{
     color: #0363ca;
     margin: 0 30px;
@@ -264,13 +283,19 @@ tbody tr:nth-child(2n+1){
 .tDel{
     color: red;
 }
-.add{
+.form{
     display: flex;
     flex-direction: column;
     max-width: 700px;
     padding-top: 20px;
     width: 85%;
     margin: auto;
+}
+.formTitle{
+    font-size: 30px;
+    font-weight: bold;
+    padding: 40px 0;
+    text-align: center;
 }
 .form-row{
     display: flex;
@@ -279,16 +304,23 @@ tbody tr:nth-child(2n+1){
 .form-row div{
     width: 50%;
 }
+
 .form-row label{
     display: block;
     padding: 10px;
     font-size: 15px;
     font-weight: 500;
 }
+div.fWidth{
+    width: 100%;
+}
 input[type="date"], select{
     cursor: pointer;
 }
-.add input , .add select{
+.form input[disabled]{
+    background-color: #e1e1e1;
+}
+.form input ,.form button , .form select{
     height: 52px;
     width: 100%;
     border-radius: 15px;
@@ -305,10 +337,10 @@ input[type="date"], select{
     outline: solid #00b7f7;
     background: #eef7ff;
 }
-.add select:invalid{
+.form select:invalid{
         color: #757575;
 }
-.add input[type="submit"]{
+.form input[type="submit"] ,.form button[type="submit"]{
     background: linear-gradient(133deg, #00b8f9, #08e5ce);
     margin: 36px 0;
     cursor: pointer;
@@ -427,6 +459,38 @@ input[type="date"], select{
     color: white;
     cursor: pointer;
     border-radius: 5px;
+}
+.print{
+    padding: 0 45px;
+}
+.p-row{
+    border-bottom: solid 1px rgb(192 191 191);
+    display: flex;
+}
+.p-row p{
+    width: 50%;
+    padding: 25px;
+}
+.p-row h1{
+    font-size: 20px;
+    width: 100%;
+    padding:  40px;
+}
+.p-div{
+    margin-top: 80px;
+    padding: 0 40px;
+    text-align: end;
+}
+.p-div button{
+    background: #57a7c9;
+    padding: 12px 25px;
+    font-weight: bold;
+    color: white;
+    border-radius: 7px;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+
 }
 
 

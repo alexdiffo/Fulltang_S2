@@ -8,12 +8,10 @@ router.use(express.json())
 
 // all receptionnist routes implemented here
 
-
-
 //get all patients
 router.get('/',  async (req, res)=>{
-    const patients = await Patient.findAll()
-    res.render("receptionniste/patientList")
+    const patients = await Patient.findAll({ order: [["id","DESC"]],})
+    res.render("receptionniste/patientList",{patient: patients})
     
 })
 
@@ -28,31 +26,18 @@ router.post ('/',  async (req, res)=>{
     
 })
 
-// formulaire d ajout
-// router.get('/register',  async (req, res)=>{
-    
-//     res.render("receptionniste/patientList")
-// })
 
-//register a new patient
+//register form
 .get('/register',  async (req, res)=>{
+    res.render("receptionniste/add-patient")    
+ })
 
-//    await Patient.create(req.body)
-//    req.flash("suppression effectué avec succes")
-//     res.redirect("/fulltang/V0/receptionnist")  
-Patient.bulkCreate([
-    { name: "Daren",
-      surname: "Ndize",
-      address: "rue des manguies",
-      sex: "male",
-      phone: "666234859",
-      email: "ndize@gmail.com",
-      CNI: "10042865",
-      birthdate: new Date()
-      
-    }
-    
-])
+ //register a patient
+.post('/register',  async (req, res)=>{
+
+    await Patient.create(req.body)
+    req.flash("nouveau patient ajouter")
+    res.redirect("/fulltang/V0/receptionnist") 
 })
 
 
@@ -60,20 +45,57 @@ Patient.bulkCreate([
 .get('/patient/:id', async(req, res)=>{
     const requestedID = req.params.id
     const patient = await Patient.findOne({where: {id:requestedID}})
-    res.render("receptionniste/info-patient")
+    if(patient){
+        res.render("receptionniste/info-patient",{patient: patient})
+    }
+    else{
+        res.redirect("/fulltang/V0/receptionnist") 
+    }
+    
 })
-
-
-//Update patient
 
 //delete patient
 .post('/patient/:id', async(req, res)=>{
     const requestedID = req.params.id
     const patient = await Patient.destroy({where: {id:requestedID}})
+    
     res.render("receptionniste/info-patient")
 })
 
-//set patient state
+//update form
+.get('/edit/:id', async(req, res)=>{
+    const requestedID = req.params.id
+    const patient = await Patient.findOne({where: {id:requestedID}})
+    if(patient){
+        res.render("receptionniste/edit-patient",{patient: patient})
+    }
+    else{
+        res.redirect("/fulltang/V0/receptionnist") 
+    }  
+    
+})
+
+
+//Update patient
+.post('/edit/:id', async(req, res)=>{
+    const requestedID = req.params.id
+    await Patient.update(req.body,{where: { id: requestedID }})
+    req.flash("informations modifiées avec succès")
+    res.redirect("/fulltang/V0/receptionnist/patient/"+requestedID) 
+})
+
+// new consultation
+.get('/new_consultation/:id',  async (req, res)=>{
+    const requestedID = req.params.id
+    await Patient.update(req.body,{where: { id: requestedID }})
+    const patient = await Patient.findOne({where: {id:requestedID}})
+    if(patient){
+        res.render("receptionniste/new-consultation",{patient: patient})
+    }
+    else{
+        res.redirect("/fulltang/V0/receptionnist") 
+    }    
+ })
 
 
 

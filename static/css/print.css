@@ -1,0 +1,31 @@
+.left-container, header, .p-div{
+    display: none;
+}
+.top-content{
+    border-bottom: solid 1px #c0bfbf;
+    padding-bottom: 15x;
+}
+.top-content p{
+    padding-bottom: 5px;
+}
+.welcome{
+    font-size: 13px;
+    color: #878787;
+}
+.print{
+    padding: 0 45px;
+   
+}
+.p-row{
+    border-bottom: solid 1px rgb(192 191 191);
+    display: flex;
+}
+.p-row p{
+    width: 50%;
+    padding: 6px 0;
+}
+.p-row h1{
+    font-size: 20px;
+    width: 100%;
+    padding:  20px 45px;
+}
