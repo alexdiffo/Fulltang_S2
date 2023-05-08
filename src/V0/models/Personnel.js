@@ -1,35 +1,41 @@
 const {Model, DataTypes} = require('sequelize')
 const sequelize = require('../repository/database')
+const Consultation = require('./Consultation')
+const Parametres = require('./Parametres')
+const Patient = require('./Patient')
 
 class Personnel extends Model {}
 
 Personnel.init({
-    name:{
-        type: DataTypes.STRING        
+    nom:{
+        type: DataTypes.TEXT        
     },
-    surname:{
-        type: DataTypes.STRING
+    prenom:{
+        type: DataTypes.TEXT        
     },
-    address:{
-        type: DataTypes.STRING
-    },
-    phone:{
-        type:DataTypes.STRING
-    },
-    birthdate:{
+    date_naissance:{
         type:DataTypes.DATE
+    }, 
+    sexe:{
+        type:DataTypes.TEXT
     },
-    role:{
-        type:DataTypes.ENUM,
-        values: ['Doctor', 'LabTechnician', 'Receptionnist', 'Cashier']
+    domicile:{
+        type:DataTypes.TEXT
+    }, 
+    telephone:{
+        type:DataTypes.TEXT
     },
-    personnel_number:{
-        type:DataTypes.BIGINT
+    specialite:{
+        type:DataTypes.TEXT
     }
 }, {
     sequelize,
-    modelName: 'users'
+    modelName: 'personnel'
 }
 )
+
+// Personnel.hasMany(Patient)
+// Personnel.hasMany(Consultation)
+
 
 module.exports = Personnel
