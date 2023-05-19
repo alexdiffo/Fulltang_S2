@@ -44,50 +44,98 @@ var modalBox=document.querySelector(".modalBox")
 var text =document.querySelector(".modalBox span")
 var val=document.querySelector(".mDecision input")
 var cancel=document.querySelector(".mDecision > button")
+var sup=document.querySelector('.maj-profil')
 
+if(mWindow){
 
-const move=()=>{
-    mWindow.style.opacity=null
-    modalBox.style.transform=null
-    window.setTimeout(()=>{
-        mWindow.style.display=null
-        mWindow.setAttribute("aria-hidden","true ")
-    },400)
-}
-
-const box=()=>{
-        mWindow.style.display="flex"
-        mWindow.removeAttribute("aria-hidden")
+    const move=()=>{
+        mWindow.style.opacity=null
+        modalBox.style.transform=null
         window.setTimeout(()=>{
-            mWindow.style.opacity="1"
-            modalBox.style.transform="translateY(0px)"
-        },10)
+            mWindow.style.display=null
+            mWindow.setAttribute("aria-hidden","true ")
+        },400)
+    }
+
+    const box=()=>{
+            mWindow.style.display="flex"
+            mWindow.removeAttribute("aria-hidden")
+            window.setTimeout(()=>{
+                mWindow.style.opacity="1"
+                modalBox.style.transform="translateY(0px)"
+            },10)
+    }
+
+    //ovrir la modalBox
+    del.forEach(i=>{
+        i.addEventListener("click", function(){
+
+            text.textContent=i.parentNode.parentNode.children[1].textContent
+            val.setAttribute("value",i.parentNode.parentNode.children[0].textContent)
+            box()
+        })
+    })
+
+    //fermer la modalBox
+    mWindow.addEventListener("click",move)
+    cancel.addEventListener("click",move)
+
+    modalBox.addEventListener("click",(e)=>{
+        e.stopPropagation()
+    })
+
+    if(sup){
+    sup.addEventListener("click",box)
 }
 
-//ovrir la modalBox
-del.forEach(i=>{
-    i.addEventListener("click", function(){
+}
 
-        text.textContent=i.parentNode.parentNode.children[1].textContent
-        val.setAttribute("value",i.parentNode.parentNode.children[0].textContent)
-        box()
-    })
-})
-
-//fermer la modalBox
-mWindow.addEventListener("click",move)
-cancel.addEventListener("click",move)
-
-modalBox.addEventListener("click",(e)=>{
-    e.stopPropagation()
-})
 
 
 /////// fermer le bloc de notification
 
 var closes=document.querySelector(".notification i")
 
-closes.addEventListener("click",()=>{
+if(closes){
+    closes.addEventListener("click",()=>{
     closes.parentNode.style.display="none"
 })
+}
 
+// ajouter un champ d examen/pmedicament
+var section =document.querySelectorAll("#section")
+
+
+if(section){
+
+    section.forEach(i=>{
+        
+        i.querySelector(".form-row i").addEventListener("click", function(){
+            i.removeChild(this.parentNode.parentNode.parentNode)
+        })
+
+        let add=i.children[1].cloneNode(true)
+        
+
+        i.querySelector(".s-regroup button").addEventListener("click", function(){   
+
+            if(i.children[1]){
+
+                add=i.children[1].cloneNode(true)
+                i.appendChild(add)
+
+            }else{
+
+                i.appendChild(add)
+                
+            }
+
+            //supprimer les champ d examen/medicament
+            add.querySelector("i").addEventListener("click",function(){
+                i.removeChild(this.parentNode.parentNode.parentNode)
+            })
+            
+        })
+
+    })
+}

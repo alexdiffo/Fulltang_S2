@@ -12,6 +12,9 @@ const Result = require('./Resultat')
 class Consultation extends Model {}
 
 Consultation.init({
+    montant:{
+        type:DataTypes.TEXT
+    },
     date:{
         type: DataTypes.DATE        
     },
@@ -39,8 +42,8 @@ Consultation.init({
 // Consultation.belongsToMany(Medicament, {through:Prescription})
 // Examen.belongsToMany(Consultation, {through:Result})
 
-Examen.belongsToMany(Consultation, {through:Result})
-Consultation.belongsToMany(Examen, {through:Result})
+Consultation.belongsToMany(Examen, {through: Result })
+Examen.belongsToMany(Consultation, {through: Result })
 
 Consultation.belongsToMany(Medicament, {through:Prescription})
 Medicament.belongsToMany(Consultation, {through:Prescription})

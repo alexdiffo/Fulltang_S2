@@ -31,7 +31,7 @@
                     </p>
                 </div>
                 <% if(locals.message){ %>
-                    <div class="notification">
+                    <div class="<%='notification '+type %>" >
                         <p>
                             <%=message %>
                         </p>
@@ -45,19 +45,19 @@
                     </div>
                     <div class="colonne-info">
                         <h2>NOM</h2>
-                        <p><%=patient.name %></p>
+                        <p><%=patient.nom %></p>
                     </div>
                     <div class="colonne-info">
                         <h2>PRENOM</h2>
-                        <p><%=patient.surname %></p>
+                        <p><%=patient.prenom %></p>
                     </div>
                     <div class="colonne-info">
                         <h2>DATE DE NAISSANCE</h2>
-                        <p><%=patient.birthdate.toLocaleDateString() %></p>
+                        <p><%=patient.date_naissance.toLocaleDateString() %></p>
                     </div>
                     <div class="colonne-info">
                         <h2>SEXE</h2>
-                        <p><%=patient.sex %></p>
+                        <p><%=patient.sexe %></p>
                     </div>
                     
                     
@@ -66,7 +66,7 @@
                 <div class="basic-info">
                     <div class="colonne-info">
                          <h2>Adresse</h2>
-                         <p><%=patient.address %></p>
+                         <p><%=patient.domicile %></p>
                      </div>
                      <div class="colonne-info">
                         <h2>N° DE CNI</h2>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="colonne-info">
                         <h2>N° DE TELEPHONE</h2>
-                        <p><%=patient.phone %></p>
+                        <p><%=patient.telephone %></p>
                     </div>
                 </div>
                 <div class="maj-profil">
@@ -90,10 +90,22 @@
                 </div>
 
             </div>
+            <div class="mWindow" aria-hidden="true">
+                <div class="modalBox">
+                        <p>Voulez vous vraiment supprimer le patient Mr/Mme  <%=patient.nom+'  '+patient.prenom %>  </p>
+                        <div class="mDecision">
+                            <form method="post">
+                                <input type="hidden" value="<%=patient.id %>" name="id"/>
+                                <button type="submit">OUI</button>
+                            </form>
+                            <button>NON</button>
+                        </div>
+                </div>
+            </div>
         </div>
          
     </div>
-    
+   
 </body>
 </html>
 

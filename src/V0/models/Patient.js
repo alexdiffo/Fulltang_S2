@@ -23,6 +23,12 @@ Patient.init({
     }, 
     telephone:{
         type:DataTypes.TEXT
+    },
+    email:{
+        type:DataTypes.TEXT
+    },
+    CNI:{
+        type:DataTypes.TEXT
     }
 }, {
     sequelize,

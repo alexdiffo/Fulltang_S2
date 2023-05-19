@@ -25,10 +25,10 @@
                         Bienvenu à la polyclinique Fulltang
                     </p>
                     <p>
-                        Caissier profil
+                        Generalist profil
                     </p>
                     <p class="page-title">
-                        Liste des consultations...
+                        Historiques des consultations...
                     </p>
                 </div>
                 <div class="patient-list">
@@ -48,7 +48,7 @@
                                     <th>Sexe</th>
                                     <th>service</th>
                                     <th>montant</th>
-                                    <th>Action</th>
+                                    <th>Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,7 +63,7 @@
                                         <td><%=i.montant %></td>
                                         
                                         <td>
-                                            <a class="payement" href=<%="/fulltang/V0/cashier/payer/"+i.id %> >payement <i class="fa-solid fa-piggy-bank"></i></a>
+                                            <a class="payement" style="background: #1d87b4;" href=<%="/fulltang/V0/doctor/consultation/"+i.id %> >consulter <i class="fa-solid fa-briefcase-medical"></i></a>
                                             
                                         </td>
                                     </tr>

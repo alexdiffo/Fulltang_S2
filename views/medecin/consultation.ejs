@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>dashboard</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script  src='/js/script.js' defer></script>
+</head>
+<body>
+    <div class="main">
+        
+        <%- include("leftBar") %>
+
+        <div class="right-container">
+            
+            <%- include("header") %>
+
+            <div class="content">
+                <div class="top-content">
+                    <p class="welcome">
+                        Bienvenu à la polyclinique Fulltang
+                    </p>
+                    <p>
+                        Receptionniste profil
+                    </p>
+                    <p class="page-title">
+                        nouvelle consultation...
+                    </p>
+                </div>
+                <form method="post" class="consultation form">
+                    <div class="formTitle">
+                        Mr/Mme 
+                        <%=patient.nom+'  '+patient.prenom %>
+                     
+                </div>
+                    <div class="segment">
+                        <div class="s-theme">
+                            Parametres
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label>Poids (en kg)</label>
+                                <input class="focus" type="text" name="poids" required/>
+                            </div>
+                            <div>
+                                <label>temperature (en °c)</label>
+                                <input class="focus" type="text" name="temperature" required/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label>Tension arterielle</label>
+                                <input class="focus" type="text" name="tension"  required/>
+                            </div>
+                            <div>
+                                <label>groupe sanguin</label>
+                                <input class="focus" type="text" name="groupe_s"  required/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <label>rhesus</label>
+                                <input class="focus" type="text" name="rhesus" required/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="segment">
+                        <div class="s-theme">
+                            Diagnostic
+                        </div>
+                        <div class="form-row">
+                            <textarea placeholder="entrer votre Diagnostic..." name="diagnostic"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="segment" id="section">
+                        <div class="s-regroup">
+                            <div class="s-theme">
+                                Medicament à prescrire
+                            </div>
+                            <div>
+                                <button type="button">New medicament</button>
+                            </div>
+                        </div> 
+                        
+                        <div class="form-row" >
+                            <div>
+                                <select class="focus" required name="medicament" >
+                                    <option selected disabled value="" style=" color: black ; font-weight: bold">- - - - - - - - - - - - - - - -</option>
+                                    <% medicament.forEach(i=>{ %>
+                                        <option value="<%=i.id %>" ><%=i.nom %></option>
+                                        <% })%>
+                                </select>
+                            </div>
+                            <div>
+                               <div class="del-ligne">
+                                    <i class="fa-solid fa-trash-can "></i>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="segment" id="section">
+                        <div class="s-regroup">
+                            <div class="s-theme">
+                                Examen à prescrire
+                            </div>
+                            <div>
+                                <button type="button">New examen</button>
+                            </div>
+                        </div> 
+                        
+                        <div class="form-row" >
+                            <div>
+                                <select class="focus" required name="examen" >
+                                    <option selected disabled value="" style=" color: black ; font-weight: bold">- - - - - - - - - - - - - - - -</option>
+                                    <% examen.forEach(i=>{ %>
+                                    <option value="<%=i.id %>" ><%=i.nom %></option>
+                                    <% })%>
+                                </select>
+                            </div>
+                            <div>
+                               <div class="del-ligne">
+                                    <i class="fa-solid fa-trash-can "></i>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="segment">
+                        <div class="s-theme">
+                            Notes de consultation
+                        </div>
+                        <div class="form-row">
+                            <textarea placeholder="description detaillé de la consultation..." name="observation" ></textarea>
+                        </div>
+                    </div>
+
+
+                    <input  type="submit" value="enregistrer"/>
+                </form>
+            </div>
+        </div>
+         
+    </div>
+    
+</body>
+</html>

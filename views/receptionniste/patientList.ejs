@@ -34,7 +34,7 @@
                 </div>
                 <div class="patient-list">
                     <% if(locals.message){ %>
-                        <div class="notification">
+                        <div class="<%='notification '+type %>">
                             <p>
                                 <%=message %>
                             </p>
@@ -65,11 +65,11 @@
                                 <% patient.forEach(i=>{ %>
                                     <tr>
                                         <td><%=i.id%></td>
-                                        <td><%=i.name%></td>
-                                        <td><%=i.surname%></td>
-                                        <td><%=i.sex%></td>
-                                        <td><%=i.phone%></td>
-                                        <td><%=i.address%></td>
+                                        <td><%=i.nom%></td>
+                                        <td><%=i.prenom%></td>
+                                        <td><%=i.sexe%></td>
+                                        <td><%=i.telephone%></td>
+                                        <td><%=i.domicile%></td>
                                         
                                         <td>
                                             <a class="tView" href=<%="/fulltang/V0/receptionnist/patient/"+i.id %> ><i class="fa-solid fa-eye "></i></a>

@@ -29,7 +29,7 @@
                            <strong>ID_FACTURE: </strong>  16166
                         </p>
                         <p>
-                            <strong>Date: </strong>   lundi le 12 2023
+                            <strong>Date: </strong>  <%=new Date().toLocaleDateString() %>
                         </p>   
                     </div>
                     <div class="p-row">
@@ -37,15 +37,15 @@
                     </div>
                     <div class="p-row">
                         <p>Nom & prenom</p>
-                        <p>DIFFO Alaex</p>
+                        <p><%=consultation.patient.nom+" "+consultation.patient.prenom %></p>
                     </div>
                     <div class="p-row">
                         <p>Service</p>
-                        <p>Généraliste</p>
+                        <p><%=consultation.specialite %></p>
                     </div>
                     <div class="p-row">
                         <p>Net a payer</p>
-                        <p><strong>2000 fcfa</strong></p>
+                        <p><strong><%=consultation.montant %> fcfa</strong></p>
                     </div>
                 </div>  
                 <div class="p-div">

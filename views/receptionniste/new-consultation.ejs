@@ -31,18 +31,19 @@
                     </p>
                 </div>
                 
-                <form class="form">
+                <form class="form" method="post">
                     <div class="formTitle">
                             Mr/Mme 
-                            <%=patient.name+'  '+patient.surname %>
+                            <%=patient.nom+'  '+patient.prenom %>
                          
                     </div>
+                    
                     <div class="form-row">
-                        
+                        <input type="hidden" name="patientId" value="<%=patient.id %>" />
                         <div class="fWidth">
                             <label>service</label>
-                            <select class="focus" required >
-                                <option selected disabled value="" style=" color: black ; font-weight: bold"></option>
+                            <select class="focus" name="specialite" required >
+                                <option selected disabled value="" style=" color: black ; font-weight: bold">choisir une option</option>
                                 <option value="generaliste">Généraliste</option>
                                 <option value="Spétialiste">Spétialiste</option>
                               
@@ -53,7 +54,7 @@
                     <div class="form-row">
                         <div class="fWidth">
                             <label>cout</label>
-                            <input class="focus" id="cout" disabled value="" type="number"  required/>
+                            <input class="focus disable" id="montant"  value="" type="text" name="montant" required/>
 
                         </div>
                     </div>
@@ -70,21 +71,21 @@
 
     <script>
         var select=document.querySelector(".form-row select")
-        var cout=document.querySelector("#cout")
+        var montant=document.querySelector("#montant")
         var form=document.querySelector(".form")
 
         //changer le cout de consultation
         select.addEventListener("change",function(){
             if(select.selectedOptions[0].value=="generaliste" ){
-                cout.value="2000"
+                montant.value="2000"
             }else{
-                cout.value="5000"
+                montant.value="5000"
             }
         })
 
         //confirmer le payement
         form.addEventListener("submit",function(e){
-            var decision= confirm("voulez vous vraiment confirmer ce payement?")
+            var decision= confirm("voulez vous vraiment creer une nouvelle consultation?")
             if(!decision){
                 e.preventDefault()
             }

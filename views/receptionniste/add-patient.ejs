@@ -34,21 +34,21 @@
                     <div class="form-row">
                         <div>
                             <label>Nom</label>
-                            <input class="focus" type="text" name="name" required/>
+                            <input class="focus" type="text" name="nom" required/>
                         </div>
                         <div>
                             <label>Prénom</label>
-                            <input class="focus" type="text" name="surname" required/>
+                            <input class="focus" type="text" name="prenom" required/>
                         </div>
                     </div>
                     <div class="form-row">
                         <div>
                             <label>Date de naissance</label>
-                            <input class="focus" type="date" name="birthdate" max="<%=new Date().toISOString().split('T')[0] %>" required />
+                            <input class="focus" type="date" name="date_naissance" max="<%=new Date().toISOString().split('T')[0] %>" required />
                         </div>
                         <div>
                             <label>Sexe</label>
-                            <select class="focus" name="sex" required  >
+                            <select class="focus" name="sexe" required  >
                                 <option selected disabled value="" style=" color: black ; font-weight: bold"></option>
                                 <option value="Masculin">Masculin</option>
                                 <option value="Féminin">Féminin</option>
@@ -62,20 +62,19 @@
                         </div>
                         <div>
                             <label>N° téléphone</label>
-                            <input class="focus" type="number" name="phone" required/>
+                            <input class="focus" type="number" name="telephone" required/>
                         </div>
                     </div>
                     <div class="form-row">
                             <div>
                                 <label>Adresse</label>
-                                <input class="focus" type="text" name="address" required/>
+                                <input class="focus" type="text" name="domicile" required/>
                             </div>
                             <div>
                                 <label>N° CNI</label>
                                 <input class="focus" type="number" name="CNI" required/>
                             </div>
                     </div>
-                    
                     <input  type="submit" value="enregistrer"/>
                 </form>
             </div>

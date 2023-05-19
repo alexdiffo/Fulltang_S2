@@ -33,7 +33,7 @@
                 </div>
                 <div class="patient-list">
                     <% if(locals.message){ %>
-                        <div class="notification">
+                        <div class="<%='notification '+type %>">
                             <p>
                                 <%=message %>
                             </p>
@@ -62,14 +62,14 @@
                             </thead>
                             <tbody>
 
-                                <% patient.forEach(i=>{ %>
+                                <% consultation.forEach(i=>{ %>
                                     <tr>
-                                        <td><%=i.id%></td>
-                                        <td><%=i.name%></td>
-                                        <td><%=i.surname%></td>
-                                        <td><%=i.sex%></td>
-                                        <td>Géneraliste</td>
-                                        <td>2000 fcfa</td>
+                                        <td><%=i.id %></td>
+                                        <td><%=i.patient.nom %></td>
+                                        <td><%=i.patient.prenom %></td>
+                                        <td><%=i.patient.sexe %></td>
+                                        <td><%=i.specialite %></td>
+                                        <td><%=i.montant %></td>
                                         <td>
                                             <a class="tEdit" href=<%="/fulltang/V0/cashier/print/"+i.id %> style="margin: 0;"><i class="fa-solid fa-print"></i></a>
                                             

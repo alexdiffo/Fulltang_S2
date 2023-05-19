@@ -18,7 +18,6 @@ Examen.init({
 }
 )
 
-// Examen.belongsToMany(Consultation, {through:Result})
-// Consultation.belongsToMany(Examen, {through:Result})
+
 
 module.exports = Examen
