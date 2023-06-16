@@ -29,7 +29,7 @@
                         Receptionniste profil
                     </p>
                     <p class="page-title">
-                        information du patient...
+                        information du personnel...
                     </p>
                 </div>
                 <% if(locals.message){ %>
@@ -43,23 +43,23 @@
                 <div class="basic-info">
                     <div class="colonne-info">
                         <h2>iD</h2>
-                        <p><%=patient.id %></p>
+                        <p><%=personnel.id %></p>
                     </div>
                     <div class="colonne-info">
                         <h2>NOM</h2>
-                        <p><%=patient.nom %></p>
+                        <p><%=personnel.nom %></p>
                     </div>
                     <div class="colonne-info">
                         <h2>PRENOM</h2>
-                        <p><%=patient.prenom %></p>
+                        <p><%=personnel.prenom %></p>
                     </div>
                     <div class="colonne-info">
                         <h2>DATE DE NAISSANCE</h2>
-                        <p><%=patient.date_naissance.toLocaleDateString() %></p>
+                        <p><%=personnel.date_naissance.toLocaleDateString() %></p>
                     </div>
                     <div class="colonne-info">
                         <h2>SEXE</h2>
-                        <p><%=patient.sexe %></p>
+                        <p><%=personnel.sexe %></p>
                     </div>
                     
                     
@@ -67,43 +67,32 @@
 
                 <div class="basic-info">
                     <div class="colonne-info">
+                        <h2>Profil</h2>
+                        <p><%=personnel.specialite %></p>
+                    </div>
+                    <div class="colonne-info">
                          <h2>Adresse</h2>
-                         <p><%=patient.domicile %></p>
+                         <p><%=personnel.domicile %></p>
                      </div>
                      <div class="colonne-info">
                         <h2>N° DE CNI</h2>
-                        <p><%=patient.CNI %></p>
+                        <p><%=personnel.CNI %></p>
                     </div>
                  </div>
 
                 <div class="basic-info">
                    <div class="colonne-info">
                         <h2>E-MAIL</h2>
-                        <p><%=patient.email %></p>
+                        <p><%=personnel.email %></p>
                     </div>
                     <div class="colonne-info">
                         <h2>N° DE TELEPHONE</h2>
-                        <p><%=patient.telephone %></p>
+                        <p><%=personnel.telephone %></p>
                     </div>
                 </div>
-                <div class="maj-profil">
-                     <a href=<%="/fulltang/V0/receptionnist/edit/"+patient.id %>>Modifer</a>
-                     <a>Supprimer</a>
-                </div>
-
+                
             </div>
-            <div class="mWindow" aria-hidden="true">
-                <div class="modalBox" id="modalBox" >
-                        <p>Voulez vous vraiment supprimer le patient Mr/Mme  <%=patient.nom+'  '+patient.prenom %>  </p>
-                        <div class="mDecision">
-                            <form method="post">
-                                <input type="hidden" value="<%=patient.id %>" name="id"/>
-                                <button type="submit">OUI</button>
-                            </form>
-                            <button>NON</button>
-                        </div>
-                </div>
-            </div>
+            
         </div>
          
     </div>

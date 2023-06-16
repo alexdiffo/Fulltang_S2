@@ -7,10 +7,12 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script type="text/javascript" src="/js/jquery.min.js" defer></script>
     <script  src='/js/script.js' defer></script>
     <script  src='/js/pagination.js' defer></script>
 </head>
 <body>
+    <div class="preload"></div>
     <div class="main">
         
         <%- include("leftBar") %>
@@ -97,7 +99,7 @@
                     </div>
                 </div>
                 <div class="mWindow" aria-hidden="true">
-                    <div class="modalBox">
+                    <div class="modalBox" id="modalBox">
                             <p>Voulez vous vraiment supprimer le patient Mr/Mme <span></span> </p>
                             <div class="mDecision">
                                 <form method="post">
@@ -113,5 +115,9 @@
          
     </div>
     
+    <script>
+        
+           
+    </script>
 </body>
 </html>

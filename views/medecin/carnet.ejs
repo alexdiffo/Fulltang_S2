@@ -17,160 +17,30 @@
         <%- include("leftBar") %>
 
         <div class="right-container">
-            
-            <%- include("header") %>
 
+            <%- include("header") %>
+            
             <div class="content">
                 <div class="top-content">
                     <p class="welcome">
                         Bienvenu à la polyclinique Fulltang
                     </p>
                     <p>
-                        Receptionniste profil
+                        carnet de consultation...
                     </p>
                     <p class="page-title">
-                        nouvelle consultation...
+                        Mr/Mme <%=patient.nom+'  '+patient.prenom %>
                     </p>
                 </div>
-                <form method="post" class="consultation form">
-                    <div class="formTitle">
-                        Mr/Mme 
-                        <%=patient.nom+'  '+patient.prenom %>
-                        <a class="voir-carnet">(voir carnet)</a>
-                     
-                    </div>
-                    <div class="segment">
-                        <div class="s-theme">
-                            Parametres
-                        </div>
-                        <div class="form-row">
-                            <div>
-                                <label>Poids (en kg)</label>
-                                <input class="focus" type="text" name="poids" required/>
-                            </div>
-                            <div>
-                                <label>temperature (en °c)</label>
-                                <input class="focus" type="text" name="temperature" required/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div>
-                                <label>Tension arterielle</label>
-                                <input class="focus" type="text" name="tension"  required/>
-                            </div>
-                            <div>
-                                <label>groupe sanguin</label>
-                                <input class="focus" type="text" name="groupe_s"  required/>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div>
-                                <label>rhesus</label>
-                                <input class="focus" type="text" name="rhesus" required/>
-                            </div>
-                        </div>
+                    <div class="carnet" id="modalBox" style="overflow: inherit; height: auto;">
 
-                    </div>
-
-                    <div class="segment">
-                        <div class="s-theme">
-                            Diagnostic
-                        </div>
-                        <div class="form-row">
-                            <textarea placeholder="entrer votre Diagnostic..." name="diagnostic"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="segment" id="section">
-                        <div class="s-regroup">
-                            <div class="s-theme">
-                                Medicament à prescrire
-                            </div>
-                            <div>
-                                <button type="button">New medicament</button>
-                            </div>
-                        </div> 
-                        
-                        <div class="form-row" >
-                            <div>
-                                <select class="focus" required name="medicament" >
-                                    <option selected disabled value="" style=" color: black ; font-weight: bold">- - - - - - - - - - - - - - - -</option>
-                                    <% medicament.forEach(i=>{ %>
-                                        <option value="<%=i.id %>" ><%=i.nom %></option>
-                                        <% })%>
-                                </select>
-                            </div>
-                            <div>
-                               <div class="del-ligne">
-                                    <i class="fa-solid fa-trash-can "></i>
-                               </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="segment" id="section">
-                        <div class="s-regroup">
-                            <div class="s-theme">
-                                Examen à prescrire
-                            </div>
-                            <div>
-                                <button type="button">New examen</button>
-                            </div>
-                        </div> 
-                        
-                        <div class="form-row" >
-                            <div>
-                                <select class="focus" required name="examen" >
-                                    <option selected disabled value="" style=" color: black ; font-weight: bold">- - - - - - - - - - - - - - - -</option>
-                                    <% examen.forEach(i=>{ %>
-                                    <option value="<%=i.id %>" ><%=i.nom %></option>
-                                    <% })%>
-                                </select>
-                            </div>
-                            <div>
-                               <div class="del-ligne">
-                                    <i class="fa-solid fa-trash-can "></i>
-                               </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="segment">
-                        <div class="s-theme">
-                            Notes de consultation
-                        </div>
-                        <div class="form-row">
-                            <textarea placeholder="description detaillé de la consultation..." name="observation" ></textarea>
-                        </div>
-                    </div>
-
-
-                    <input  type="submit" value="enregistrer"/>
-                </form>
-                <div class="mWindow" aria-hidden="true">
-                   
-                    <div class="carnet" id="modalBox">
-                        <div class="exit">
-                            <i class="fa-solid fa-xmark "></i>
-                        </div>
-                        <div class="top-content">
-                            <p class="welcome">
-                                Bienvenu à la polyclinique Fulltang
-                            </p>
-                            <p>
-                                carnet de consultation...
-                            </p>
-                            <p class="page-title">
-                                Mr  <%=patient.nom+'  '+patient.prenom %>
-                            </p>
-                        </div>
                         <% if(carnet.length > 0){ %>
 
                             <% carnet.forEach(i=>{ %>
 
                                 <div class="consultation">
                                     <div class="consultation-ref">
-                                        <h1>consultation du  <%=i.date.toLocaleDateString() %> (<%=i.personnel.nom %>)</h1>
+                                        <h1>consultation du  <%=i.date.toLocaleDateString() %> (Dr <%=i.personnel.nom %>)</h1>
                                     </div>
                                     
                                     <div class="carnet-bloc">
@@ -290,10 +160,10 @@
                             </div>
 
                         <% } %>
-        
+
                     </div>
                 
-                </div>
+
             </div>
         </div>
          

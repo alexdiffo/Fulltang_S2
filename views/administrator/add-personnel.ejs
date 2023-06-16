@@ -29,11 +29,14 @@
                         Receptionniste profil
                     </p>
                     <p class="page-title">
-                        enregistrer un patient...
+                        enregistrer le personnel...
                     </p>
                 </div>
-                <form method="post" class="form">
-                    <div class="form-row">
+                <form method="post" class="model-form">
+                    <div class="model-title">
+                        enregistrer personnel
+                    </div>
+                    <div class="double-row">
                         <div>
                             <label>Nom</label>
                             <input class="focus" type="text" name="nom" required/>
@@ -43,12 +46,15 @@
                             <input class="focus" type="text" name="prenom" required/>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="sigle-row">
                         <div>
                             <label>Date de naissance</label>
                             <input class="focus" type="date" name="date_naissance" max="<%=new Date().toISOString().split('T')[0] %>" required />
                         </div>
-                        <div>
+                       
+                    </div>
+                    <div class="sigle-row">
+                         <div>
                             <label>Sexe</label>
                             <select class="focus" name="sexe" required  >
                                 <option selected disabled value="" style=" color: black ; font-weight: bold"></option>
@@ -57,7 +63,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="double-row">
                         <div>
                             <label>Email</label>
                             <input class="focus" type="email" name="email"  required/>
@@ -67,18 +73,30 @@
                             <input class="focus" type="number" name="telephone" required/>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="sigle-row">
+                        
                             <div>
                                 <label>Adresse</label>
                                 <input class="focus" type="text" name="domicile" required/>
                             </div>
-                            <div>
-                                <label>N° CNI</label>
-                                <input class="focus" type="number" name="CNI" required/>
-                            </div>
+                            
+                    </div>
+                    <div class="sigle-row">
+                        <div>
+                            <label>Specialité</label>
+                            <select class="focus" name="specialite" required  >
+                                <option selected disabled value="" style=" color: black ; font-weight: bold">- - - - - - - - - -</option>
+                                <option value="receptionnist">Receptionniste</option>
+                                <option value="cashier">cassier</option>
+                                <option value="doctor">Généraliste</option>
+                                <option value="Specialiste">Spécialiste</option>
+                                <option value="labtechnician">Laborantin</option>
+                            </select>
+                        </div>
                     </div>
                     <input  type="submit" value="enregistrer"/>
                 </form>
+                
             </div>
         </div>
          

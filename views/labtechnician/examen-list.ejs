@@ -30,18 +30,10 @@
                         Caissier profil
                     </p>
                     <p class="page-title">
-                        Consultations payées...
+                        Liste des examens à traités...
                     </p>
                 </div>
                 <div class="patient-list">
-                    <% if(locals.message){ %>
-                        <div class="<%='notification '+type %>">
-                            <p>
-                                <%=message %>
-                            </p>
-                            <i class="fa-solid fa-xmark"></i>
-                        </div>
-                    <% } %>
                     <div class="search">
                         <div>
                             <input type="text" placeholder="search">
@@ -52,36 +44,30 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nom</th>
-                                    <th>Prénom</th>
-                                    <th>Sexe</th>
+                                    <th>ID_E</th>
+                                    <th>patient</th>
                                     <th>service</th>
+                                    <th>Examen</th>
                                     <th>montant</th>
-                                    <th>Print</th>
-                                    <th>statut</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <% consultation.forEach(i=>{ %>
-                                    <tr>
-                                        <td><%=i.id %></td>
-                                        <td><%=i.patient.nom %></td>
-                                        <td><%=i.patient.prenom %></td>
-                                        <td><%=i.patient.sexe %></td>
-                                        <td><%=i.specialite %></td>
-                                        <td><%=i.montant %></td>
-                                        <td>
-                                            <a class="tEdit" href=<%="/fulltang/V0/cashier/print/"+i.id %> style="margin: 0;"><i class="fa-solid fa-print"></i></a>
-                                            
-                                        </td>
-                                        
-                                        <td>
-                                            <a class="payer"> payer <i class="fa-solid fa-circle-check"></i></a>
-                                            
-                                        </td>
-                                    </tr>
+                                    <% i.examens.forEach(e=>{ %>
+                                        <tr>
+                                            <td><%=e.result.consultationId+"_"+e.result.examenId %></td>
+                                            <td><%=i.patient.nom+" "+i.patient.prenom %></td>
+                                            <td><%=i.specialite %></td>
+                                            <td><%=e.nom %></td>
+                                            <td>2000 fcfa</td>
+                                            <td>
+                                                <a class="tEdit" href="<%='/fulltang/V0/labtechnician/description_examen/'+e.result.consultationId+'_'+e.result.examenId %>" > <i class="fa-solid fa-circle-plus"></i></a>
+                                                
+                                            </td>
+                                        </tr>
+                                    <% }) %>
                                 <% }) %>
                                 
                                  
@@ -98,7 +84,6 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
          

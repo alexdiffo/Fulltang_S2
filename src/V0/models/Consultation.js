@@ -28,8 +28,11 @@ Consultation.init({
         type:DataTypes.TEXT
     },
     paye:{
-        type:DataTypes.BOOLEAN
-    }
+        type:DataTypes.TEXT
+    },
+    rendez_vous:{
+        type:DataTypes.TEXT
+    },
 }, {
     sequelize,
     modelName: 'consultation'
@@ -51,6 +54,8 @@ Medicament.belongsToMany(Consultation, {through:Prescription})
 Consultation.hasOne(Parametres)
 Parametres.belongsTo(Consultation)
 
+Consultation.belongsTo(Personnel)
+Personnel.hasMany(Consultation)
 
 
 

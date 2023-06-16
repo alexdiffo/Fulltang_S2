@@ -27,11 +27,12 @@
                         Bienvenu à la polyclinique Fulltang
                     </p>
                     <p>
-                        Caissier profil
+                        Adiministrator profil
                     </p>
                     <p class="page-title">
-                        Consultations payées...
+                        Liste du personnel...
                     </p>
+                    
                 </div>
                 <div class="patient-list">
                     <% if(locals.message){ %>
@@ -44,7 +45,7 @@
                     <% } %>
                     <div class="search">
                         <div>
-                            <input type="text" placeholder="search">
+                            <input type="text" placeholder="search" >
                             <button><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
@@ -56,34 +57,31 @@
                                     <th>Nom</th>
                                     <th>Prénom</th>
                                     <th>Sexe</th>
-                                    <th>service</th>
-                                    <th>montant</th>
-                                    <th>Print</th>
-                                    <th>statut</th>
+                                    <th>Téléphone</th>
+                                    <th>Spécialité</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <% consultation.forEach(i=>{ %>
+                                <% personnel.forEach(i=>{ %>
                                     <tr>
-                                        <td><%=i.id %></td>
-                                        <td><%=i.patient.nom %></td>
-                                        <td><%=i.patient.prenom %></td>
-                                        <td><%=i.patient.sexe %></td>
-                                        <td><%=i.specialite %></td>
-                                        <td><%=i.montant %></td>
-                                        <td>
-                                            <a class="tEdit" href=<%="/fulltang/V0/cashier/print/"+i.id %> style="margin: 0;"><i class="fa-solid fa-print"></i></a>
-                                            
-                                        </td>
+                                        <td><%=i.id%></td>
+                                        <td><%=i.nom%></td>
+                                        <td><%=i.prenom%></td>
+                                        <td><%=i.sexe%></td>
+                                        <td><%=i.telephone%></td>
+                                        <td><%=i.specialite%></td>
                                         
                                         <td>
-                                            <a class="payer"> payer <i class="fa-solid fa-circle-check"></i></a>
-                                            
+                                            <a class="tView" href=<%="/fulltang/V0/administrator/personnel/"+i.id %> ><i class="fa-solid fa-eye "></i></a>
+                                            <a class="tEdit" href=<%="/fulltang/V0/receptionnist/edit/"+i.id %> ><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
                                         </td>
                                     </tr>
                                 <% }) %>
                                 
+                               
                                  
                                 
                             </tbody>
@@ -98,11 +96,28 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="mWindow" aria-hidden="true">
+                    <div class="modalBox" id="modalBox">
+                            <p>Voulez vous vraiment supprimer le profil Mr/Mme <span></span> </p>
+                            <div class="mDecision">
+                                <form method="post">
+                                    <input type="hidden" name="id"/>
+                                    <button type="submit">OUI</button>
+                                </form>
+                                <button>NON</button>
+                            </div>
+                    </div>
+                </div>
             </div>
         </div>
          
     </div>
+    <script>
+        var nav=document.querySelectorAll(".section")
+        nav[0].querySelector("ul").classList.add("height")
+
+
+    </script>
     
 </body>
 </html>

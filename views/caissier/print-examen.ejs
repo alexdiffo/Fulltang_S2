@@ -31,29 +31,29 @@
                            <strong>ID_FACTURE: </strong>  16166
                         </p>
                         <p>
-                            <strong>Date: </strong>
+                            <strong>Date: </strong> 
                             
-                            <% if(consultation.date){ %>
-                                <%=consultation.date.toLocaleDateString() %>
+                            <% if(consultation[0].examens[0].result.date){ %>
+                                <%=consultation[0].examens[0].result.date.toLocaleDateString() %>
                             <% }else { %>
                                 <%=new Date().toLocaleDateString() %>
                             <% } %>
                         </p>   
                     </div>
                     <div class="p-row">
-                        <h1>FACTURE DE CONSULTATION</h1>
+                        <h1>FACTURE DES EXAMENS</h1>
                     </div>
                     <div class="p-row">
                         <p>Nom & prenom</p>
-                        <p><%=consultation.patient.nom+" "+consultation.patient.prenom %></p>
+                        <p><%=consultation[0].patient.nom+" "+consultation[0].patient.prenom %></p>
                     </div>
                     <div class="p-row">
-                        <p>Service</p>
-                        <p><%=consultation.specialite %></p>
+                        <p>Examen</p>
+                        <p><%=consultation[0].examens[0].nom %></p>
                     </div>
                     <div class="p-row">
                         <p>Net a payer</p>
-                        <p><strong><%=consultation.montant %> fcfa</strong></p>
+                        <p><strong>2000 fcfa</strong></p>
                     </div>
                 </div>  
                 <div class="p-div">

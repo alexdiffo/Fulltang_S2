@@ -7,10 +7,12 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script type="text/javascript" src="/js/jquery.min.js" defer></script>
     <script  src='/js/script.js' defer></script>
     <script  src='/js/pagination.js' defer></script>
 </head>
 <body>
+    <div class="preload"></div>
     <div class="main">
         
         <%- include("leftBar") %>
@@ -44,9 +46,10 @@
                                 <tr>
                                     <th>ID_C</th>
                                     <th>Nom</th>
-                                    <th>Prénom</th>
+                                    <th>Prenom</th>
                                     <th>Sexe</th>
                                     <th>service</th>
+                                    <th>rdv</th>
                                     <th>montant</th>
                                     <th>Action</th>
                                 </tr>
@@ -57,9 +60,10 @@
                                     <tr>
                                         <td><%=i.id %></td>
                                         <td><%=i.patient.nom %></td>
-                                        <td><%=i.patient.prenom %></td>
+                                        <td><%=i.patient.prenom%></td>
                                         <td><%=i.patient.sexe %></td>
                                         <td><%=i.specialite %></td>
+                                        <td><%=i.rendez_vous %></td>
                                         <td><%=i.montant %></td>
                                         
                                         <td>
@@ -83,18 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mWindow" aria-hidden="true">
-                    <div class="modalBox">
-                            <p>Voulez vous vraiment supprimer le patient Mr/Mme</p>
-                            <div class="mDecision">
-                                <form method="post">
-                                    <input type="hidden"/>
-                                    <button type="submit">OUI</button>
-                                </form>
-                                <button>NON</button>
-                            </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
          

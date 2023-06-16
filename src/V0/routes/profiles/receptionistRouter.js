@@ -1,10 +1,30 @@
 const express = require('express')
 const router = express.Router()
+
+const app = express()
+const http=require('http')
+const server=http.createServer(app)
+const {Server}= require("socket.io")
+const io = new Server(server)
+
 const Patient = require('../../models/Patient')
 const Consultation = require('../../models/Consultation')
+const Parametre = require('../../models/Parametres')
+const Examen = require('../../models/Examen')
+const Medicament = require('../../models/Medicament')
+const { Op } = require('sequelize')
+const { Socket } = require('dgram')
 
 
 router.use(express.json())
+
+router.use((req,res,next)=>{
+    if(req.session.profil!="receptionnist"){ 
+      res.redirect("/fulltang/V0/"+req.session.profil)
+    }else{
+        next()
+    }
+})
 
 // all receptionnist routes implemented here
 
@@ -111,7 +131,8 @@ router.post ('/',  async (req, res)=>{
     const requestedID = req.params.id
     const patient = await Patient.findOne({where: {id:requestedID}})
     if(patient){
-        res.render("receptionniste/new-consultation",{patient: patient})
+        const carnet = await Consultation.findAll({ include:[{model: Examen,attributes: ["nom"]},{model: Medicament,attributes: ["nom"]},{model: Parametre, required: true}],attributes:["date","observation","diagnostic"] ,where:{ date: {[Op.not]: null},patientId: patient.id},order: [["id","DESC"]] }) 
+        res.render("receptionniste/new-consultation",{patient: patient, carnet: carnet})
     }
     else{
         res.redirect("/fulltang/V0/receptionnist") 
@@ -120,7 +141,18 @@ router.post ('/',  async (req, res)=>{
 
 .post('/new_consultation/:id',  async (req, res)=>{
 
-    await Consultation.create(req.body)
+    let data=req.body 
+
+    if(data.rendez_vous){
+        data.paye="non payer"
+
+    }else{
+        
+        data.rendez_vous="non"
+        
+    }
+  
+    await Consultation.create(data)
 
     req.flash("positive","consultation creer avec succès")
     res.redirect("/fulltang/V0/receptionnist/consultation_history") 
@@ -129,10 +161,26 @@ router.post ('/',  async (req, res)=>{
 
 
 // historique des consultation
-router.get('/consultation_history',  async (req, res)=>{
+.get('/consultation_history',  async (req, res)=>{
     const list = await Consultation.findAll({ include: Patient,order: [["id","DESC"]] }) 
     res.render("receptionniste/consultation-list",{consultation: list})
     
+})
+
+.post('/consultation_history',  async (req, res)=>{
+
+    const id=req.body.id
+
+    const list = await Consultation.findOne({where: { id: id}})
+    if(list.paye=="payer" || list.date!= null){
+        req.flash("negative","impossible de supprimer cette consultation a déja été effectué")
+        res.redirect("/fulltang/V0/receptionnist/consultation_history")
+    }else{
+        await Consultation.destroy({ where: {id: id}})
+        req.flash("positive","consultation effectué avc succès")
+        res.redirect("/fulltang/V0/receptionnist/consultation_history")
+    }
+
 })
 
 

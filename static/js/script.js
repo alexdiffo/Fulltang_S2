@@ -1,4 +1,10 @@
-
+///// preloader
+jQuery(window).load(function(){
+    window.setTimeout(()=>{
+        jQuery(".preload").fadeOut(200)
+    },500)
+    
+})
 
 //////defiler la navigation
 var item=document.querySelectorAll(".section")
@@ -40,31 +46,32 @@ bar.addEventListener("click",(e)=>{
 
 var del=document.querySelectorAll(".tDel")
 var mWindow=document.querySelector(".mWindow")
-var modalBox=document.querySelector(".modalBox")
-var text =document.querySelector(".modalBox span")
+var modalBox=document.querySelector("#modalBox")
+var text =document.querySelector("#modalBox span")
 var val=document.querySelector(".mDecision input")
 var cancel=document.querySelector(".mDecision > button")
 var sup=document.querySelector('.maj-profil')
 
-if(mWindow){
+const move=()=>{
+    mWindow.style.opacity=null
+    modalBox.style.transform=null
+    window.setTimeout(()=>{
+        mWindow.style.display=null
+        mWindow.setAttribute("aria-hidden","true ")
+    },400)
+}
 
-    const move=()=>{
-        mWindow.style.opacity=null
-        modalBox.style.transform=null
+const box=()=>{
+        mWindow.style.display="flex"
+        mWindow.removeAttribute("aria-hidden")
         window.setTimeout(()=>{
-            mWindow.style.display=null
-            mWindow.setAttribute("aria-hidden","true ")
-        },400)
-    }
+            mWindow.style.opacity="1"
+            modalBox.style.transform="translateY(0px)"
+        },10)
+}
 
-    const box=()=>{
-            mWindow.style.display="flex"
-            mWindow.removeAttribute("aria-hidden")
-            window.setTimeout(()=>{
-                mWindow.style.opacity="1"
-                modalBox.style.transform="translateY(0px)"
-            },10)
-    }
+if(cancel){
+
 
     //ovrir la modalBox
     del.forEach(i=>{
@@ -90,6 +97,37 @@ if(mWindow){
 
 }
 
+//// carnet modal box
+var view=document.querySelector(".voir-carnet")
+var exit=document.querySelector(".exit")
+
+if(view){
+
+    view.addEventListener("click",box);
+
+    //fermer la modalBox
+    mWindow.addEventListener("click",move)
+    exit.addEventListener("click",move)
+    modalBox.addEventListener("click",(e)=>{
+        e.stopPropagation()
+    })
+}
+
+
+
+////// menu deroulant
+var option=document.querySelectorAll(".line-option")
+var deroulant=document.querySelector(".deroulant")
+
+if(option){
+
+    option.forEach(i=>{
+        i.addEventListener("click",function(){
+            i.parentNode.querySelector(".deroulant").classList.toggle("invisible")
+        }) 
+    })
+}
+
 
 
 /////// fermer le bloc de notification
@@ -102,7 +140,7 @@ if(closes){
 })
 }
 
-// ajouter un champ d examen/pmedicament
+////ajouter un champ d examen/pmedicament
 var section =document.querySelectorAll("#section")
 
 

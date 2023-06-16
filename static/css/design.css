@@ -1,0 +1,11 @@
+.image{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../image/bg_1.png");
+}
+.title{
+  margin-bottom: 40px;
+}
+.form-control:focus{
+  border: solid 2px #2186d4;
+}

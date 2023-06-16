@@ -27,7 +27,14 @@ Personnel.init({
     },
     specialite:{
         type:DataTypes.TEXT
-    }
+    },
+    email:{
+        type:DataTypes.TEXT
+    },
+    password:{
+        type:DataTypes.TEXT
+    },
+    
 }, {
     sequelize,
     modelName: 'personnel'
@@ -36,6 +43,7 @@ Personnel.init({
 
 // Personnel.hasMany(Patient)
 // Personnel.hasMany(Consultation)
+
 
 
 module.exports = Personnel

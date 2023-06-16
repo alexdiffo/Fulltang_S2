@@ -7,10 +7,12 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script type="text/javascript" src="/js/jquery.min.js" defer></script>
     <script  src='/js/script.js' defer></script>
     <script  src='/js/pagination.js' defer></script>
 </head>
 <body>
+    <div class="preload"></div>
     <div class="main">
         
         <%- include("leftBar") %>
@@ -44,11 +46,12 @@
                                 <tr>
                                     <th>ID_C</th>
                                     <th>Nom</th>
-                                    <th>Prénom</th>
+                                    <th>Prenom</th>
                                     <th>Sexe</th>
                                     <th>service</th>
-                                    <th>montant</th>
+                                    <th>rdv</th>
                                     <th>Date</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,14 +59,15 @@
                                 <% consultation.forEach(i=>{ %>
                                     <tr>
                                         <td><%=i.id %></td>
-                                        <td><%=i.patient.nom %></td>
-                                        <td><%=i.patient.prenom %></td>
+                                        <td><%=i.patient.nom%></td>
+                                        <td><%=i.patient.prenom%></td>
                                         <td><%=i.patient.sexe %></td>
                                         <td><%=i.specialite %></td>
-                                        <td><%=i.montant %></td>
+                                        <td><%=i.rendez_vous %></td>
+                                        <td><%=i.date.toLocaleDateString() %></td>
                                         
                                         <td>
-                                            <a class="payement" style="background: #1d87b4;" href=<%="/fulltang/V0/doctor/consultation/"+i.id %> >consulter <i class="fa-solid fa-briefcase-medical"></i></a>
+                                            <a href=<%="/fulltang/V0/doctor/carnet_patient/"+i.patient.id %> >voir carnet <i class="fa-regular fa-address-book"></i></a>
                                             
                                         </td>
                                     </tr>
@@ -84,7 +88,7 @@
                     </div>
                 </div>
                 <div class="mWindow" aria-hidden="true">
-                    <div class="modalBox">
+                    <div class="modalBox" id="modalBox">
                             <p>Voulez vous vraiment supprimer le patient Mr/Mme</p>
                             <div class="mDecision">
                                 <form method="post">

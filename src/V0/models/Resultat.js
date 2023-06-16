@@ -7,11 +7,14 @@ const Consultation = require('./Consultation')
 class Result extends Model {}
 
 Result.init({
-    desciption:{
+    description:{
         type: DataTypes.TEXT        
     },
     paye:{
         type: DataTypes.BOOLEAN        
+    },
+    date:{
+        type: DataTypes.DATE        
     },
     examenId:{
         type: DataTypes.INTEGER,

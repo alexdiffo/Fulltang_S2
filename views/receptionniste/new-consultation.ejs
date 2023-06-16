@@ -7,9 +7,11 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script type="text/javascript" src="/js/jquery.min.js" defer></script>
     <script src='/js/script.js' defer></script>
 </head>
 <body>
+    <div class="preload"></div>
     <div class="main">
         
         <%- include("leftBar") %>
@@ -35,6 +37,8 @@
                     <div class="formTitle">
                             Mr/Mme 
                             <%=patient.nom+'  '+patient.prenom %>
+
+                            <a class="voir-carnet">(voir carnet)</a>
                          
                     </div>
                     
@@ -58,12 +62,167 @@
 
                         </div>
                     </div>
+
+                    <div class="form-check">
+                            <input  id="rdv" value="oui" type="checkbox" name="rendez_vous"/>
+                            <label for="rdv">Est-ce un rendez-vous?</label>  
+                    </div>
+
                     
                     <button type="submit">
                         Valider 
                         <i class="fa-solid fa-circle-check"></i>
                     </button>
                 </form>
+
+                <div class="mWindow" aria-hidden="true">
+                   
+                    <div class="carnet" id="modalBox">
+                        <div class="exit">
+                            <i class="fa-solid fa-xmark "></i>
+                        </div>
+                        <div class="top-content">
+                            <p class="welcome">
+                                Bienvenu à la polyclinique Fulltang
+                            </p>
+                            <p>
+                                carnet de consultation...
+                            </p>
+                            <p class="page-title">
+                                Mr  <%=patient.nom+'  '+patient.prenom %>
+                            </p>
+                        </div>
+                        <% if(carnet.length > 0){ %>
+
+                            <% carnet.forEach(i=>{ %>
+
+                                <div class="consultation">
+                                    <div class="consultation-ref">
+                                        <h1>consultation du  <%=i.date.toLocaleDateString() %> (Dr Fodio)</h1>
+                                    </div>
+                                    
+                                    <div class="carnet-bloc">
+                                        <div class="c-theme">
+                                            Parametres
+                                        </div>
+                                        <div class="carnet-row">
+                                            <div>
+                                                <label>Poids (en kg) :</label>
+                                                <p><%=i.parametre.poids %> kg</p>
+                                            </div>
+                                            <div>
+                                                <label>temperature :</label>
+                                                <p> <%=i.parametre.temperature %>° c</p>
+                                            </div>
+                                        </div>
+                                        <div class="carnet-row">
+                                            <div>
+                                                <label>Tension arterielle :</label>
+                                                <p><%=i.parametre.pression_arterielle %></p>
+                                            </div>
+                                            <div>
+                                                <label>groupe sanguin :</label>
+                                                <p><%=i.parametre.groupe_sanguin %></p>
+                                            </div>
+                                        </div>
+                                        <div class="carnet-row">
+                                            <div>
+                                                <label>rhesus :</label>
+                                                <p><%=i.parametre.rhesus %></p>
+                                            </div>
+                                        </div>
+            
+                                    </div>
+            
+                                    <div class="carnet-bloc">
+                                        <div class="c-theme">
+                                            Diagnostic
+                                        </div>
+                                        <div class="carnet-row">
+                                            <div style="width: 100%;">
+                                                <p>
+                                                    <%=i.diagnostic %>
+                                                </p>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+            
+                                    <div class="carnet-bloc">
+                                        <div class="c-theme">
+                                            Medicaments prescrits
+                                        </div>
+                                        <div class="carnet-row">
+                                            <% i.medicaments.forEach((j,k)=>{%>
+                                                <div>
+                                                    <label>Medicament <%=k+1%> :</label>
+                                                    <p><%=j.nom %></p>
+                                                </div>
+                                            <%})%>
+                                        </div>
+                                    
+                                    </div>
+            
+                                    <div class="carnet-bloc">
+                                        <div class="c-theme">
+                                            Examens prescrits
+                                        </div>
+                                        <div class="carnet-row">
+                                            <% i.examens.forEach((j,k)=>{%>
+                                                <div>
+                                                    <label>Examen <%=k+1%> :</label>
+                                                    <p><%=j.nom %></p>
+                                                </div>
+                                            <%})%>
+                                        </div>
+                                    
+                                    </div>
+            
+                                    <div class="carnet-bloc">
+                                        <div class="c-theme">
+                                            Resulat des Examens
+                                        </div>
+                                        <div class="carnet-row">
+                                            <% i.examens.forEach(j=>{%>
+                                                <div style="width: 100%;">
+                                                    <label><%=j.nom %> :</label>
+                                                    <p><%=j.result.description %></p>
+                                                </div>
+                                            <%})%>
+                                            
+                                        </div>
+                                    
+                                    </div>
+            
+                                    <div class="carnet-bloc">
+                                        <div class="c-theme">
+                                            Notes de consultation   
+                                        </div>
+                                        <div class="carnet-row">
+                                            <div style="width: 100%;">
+                                                <p>
+                                                    <%=i.observation %>
+                                                </p>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+            
+                                </div>
+
+                            <%})%>
+                            
+                        <% }else{ %>
+                            <div class="c-vide">
+                                Vide
+                            </div>
+
+                        <% } %>
+        
+                    </div>
+                
+                </div>
+
             </div>
         </div>
          
@@ -71,15 +230,34 @@
 
     <script>
         var select=document.querySelector(".form-row select")
+        var check=document.querySelector("#rdv")
         var montant=document.querySelector("#montant")
         var form=document.querySelector(".form")
 
         //changer le cout de consultation
         select.addEventListener("change",function(){
-            if(select.selectedOptions[0].value=="generaliste" ){
-                montant.value="2000"
+            if(!check.checked){
+                if(select.selectedOptions[0].value=="generaliste" ){
+                    montant.value="2000"
+                }else{
+                    montant.value="5000"
+                }
+            }
+        })
+
+        check.addEventListener("change", function(){
+            if(this.checked){
+                montant.value="0"
             }else{
-                montant.value="5000"
+
+                if(select.selectedOptions[0].value=="generaliste" ){
+                    montant.value="2000"
+                }
+                else if(select.selectedOptions[0].value==""){
+                    montant.value=null
+                }else{
+                    montant.value="5000"
+                }
             }
         })
 

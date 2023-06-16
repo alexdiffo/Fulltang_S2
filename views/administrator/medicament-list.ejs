@@ -15,11 +15,12 @@
     <div class="preload"></div>
     <div class="main">
         
-        <%- include("leftBar") %>
+         <%- include("leftBar") %>
 
         <div class="right-container">
-
+            
             <%- include("header") %>
+
             
             <div class="content">
                 <div class="top-content">
@@ -27,10 +28,10 @@
                         Bienvenu à la polyclinique Fulltang
                     </p>
                     <p>
-                        Caissier profil
+                        administrator profil
                     </p>
                     <p class="page-title">
-                        Consultations payées...
+                        Liste des medicaments...
                     </p>
                 </div>
                 <div class="patient-list">
@@ -49,45 +50,26 @@
                         </div>
                     </div>
                     <div class="tableBloc">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nom</th>
-                                    <th>Prénom</th>
-                                    <th>Sexe</th>
-                                    <th>service</th>
-                                    <th>montant</th>
-                                    <th>Print</th>
-                                    <th>statut</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <% consultation.forEach(i=>{ %>
+                        <div class="cadre">
+                            <div>
+                                Liste des Medicaments
+                            </div>
+                            <table class="table">
+                                <tbody>
+                                    <% medicament.forEach(i=>{ %>
                                     <tr>
                                         <td><%=i.id %></td>
-                                        <td><%=i.patient.nom %></td>
-                                        <td><%=i.patient.prenom %></td>
-                                        <td><%=i.patient.sexe %></td>
-                                        <td><%=i.specialite %></td>
-                                        <td><%=i.montant %></td>
+                                        <td style="min-width: 85px;"><%=i.nom %></td>
                                         <td>
-                                            <a class="tEdit" href=<%="/fulltang/V0/cashier/print/"+i.id %> style="margin: 0;"><i class="fa-solid fa-print"></i></a>
-                                            
-                                        </td>
-                                        
-                                        <td>
-                                            <a class="payer"> payer <i class="fa-solid fa-circle-check"></i></a>
-                                            
+                                            <a class="tEdit" href=<%="/fulltang/V0/administrator/medicament/"+i.id+"/edit" %> ><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a class="tDel"><i class="fa-solid fa-trash-can "></i></a>
                                         </td>
                                     </tr>
-                                <% }) %>
-                                
-                                 
-                                
-                            </tbody>
-                        </table>
+                                    <% })%>  
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="pagination">
                             <button class="prev"><<</button>
                             <p>
@@ -98,7 +80,18 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="mWindow" aria-hidden="true">
+                    <div class="modalBox" id="modalBox">
+                            <p>Voulez vous vraiment supprimer le medicament <span></span></p>
+                            <div class="mDecision">
+                                <form method="post">
+                                    <input type="hidden" name="id"/>
+                                    <button type="submit">OUI</button>
+                                </form>
+                                <button>NON</button>
+                            </div>
+                    </div>
+                </div>
             </div>
         </div>
          
