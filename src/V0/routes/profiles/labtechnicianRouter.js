@@ -4,6 +4,7 @@ const Patient = require('../../models/Patient')
 const Consultation = require('../../models/Consultation')
 const Examen = require('../../models/Examen')
 const Resultat = require('../../models/Resultat')
+const Personnel = require('../../models/Personnel')
 const { Op } = require('sequelize')
 
 router.use(express.json())
@@ -51,5 +52,63 @@ router.use(express.json())
     res.render("labtechnician/examen-history",{consultation: list})
 })
 
+//afficher profil
+.get('/profil',  async (req, res)=>{
+    const user = await Personnel.findOne({ where:{id: req.session.user.id } }) 
+    res.render("labtechnician/profil",{User: user})
+    
+})
+
+//modifier profil
+.get('/modifier_profil',  async (req, res)=>{
+    const user = await Personnel.findOne({ where:{id: req.session.user.id} }) 
+    res.render("labtechnician/modifier-profil",{User: user})
+    
+})
+.post('/modifier_profil',  async (req, res)=>{
+
+    let data=req.body
+    if(req.files){
+        let image=req.files.image
+        image.mv("./static/upload/"+image.name)
+        data.url_image="/upload/"+image.name 
+        req.session.user.url="/upload/"+image.name 
+    }
+   
+    await Personnel.update(data,{where: { id: req.session.user.id}})
+        req.flash("positive","profil modifier avec succès")
+        res.redirect("/fulltang/V0/labtechnician/profil")
+    
+    
+})
+.get('/profil/password',  async (req, res)=>{
+    
+    res.render("labtechnician/modifier-password")
+    
+})
+.post('/profil/password',  async (req, res)=>{
+    
+    let data= req.body
+    const user = await Personnel.findOne({ where:{id: req.session.user.id ,password: data.password}}) 
+
+    if(user){
+        
+        if(data.n_password == data.c_password){
+
+            await Personnel.update({password:data.n_password},{where: { id: req.session.user.id}})
+            req.flash("positive","mot de passe modifier avec succès")
+            res.redirect("/fulltang/V0/labtechnician/profil")
+
+        }else{
+            req.flash("negative","mot de passe de confirmation incorrect")
+            res.redirect("/fulltang/V0/labtechnician/profil/password")
+        }
+
+    }else{
+        req.flash("negative","mot de passe actuel incorrect")
+        res.redirect("/fulltang/V0/labtechnician/profil/password")
+
+    }
+})
 
 module.exports = router

@@ -34,6 +34,9 @@ Personnel.init({
     password:{
         type:DataTypes.TEXT
     },
+    url_image:{
+        type:DataTypes.TEXT
+    },
     
 }, {
     sequelize,

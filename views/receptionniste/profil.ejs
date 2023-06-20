@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>dashboard</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script type="text/javascript" src="/js/jquery.min.js" defer></script>
+    <script src='/js/script.js' defer></script>
+</head>
+<body>
+    <div class="preload"></div>
+    <div class="main">
+        
+        <%- include("leftBar") %>
+
+        <div class="right-container">
+            
+            <%- include("header") %>
+
+            <div class="content">
+                <div class="top-content">
+                    <p class="welcome">
+                        Bienvenu à la polyclinique Fulltang
+                    </p>
+                    <p>
+                        Receptionniste profil
+                    </p>
+                    <p class="page-title">
+                        profil de l'utilisateur...
+                    </p>
+                </div>
+                <% if(locals.message){ %>
+                    <div class="<%='notification '+type %>" >
+                        <p>
+                            <%=message %>
+                        </p>
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                <% } %>
+
+                <div class="user-image">
+                    <img src="<%=User.url_image%>" alt="erreur" >
+                </div>
+                <div class="basic-info">
+                    <div class="colonne-info">
+                        <h2>iD</h2>
+                        <p><%=User.id %></p>
+                    </div>
+                    <div class="colonne-info">
+                        <h2>NOM</h2>
+                        <p><%=User.nom %></p>
+                    </div>
+                    <div class="colonne-info">
+                        <h2>PRENOM</h2>
+                        <p><%=User.prenom %></p>
+                    </div>
+                    <div class="colonne-info">
+                        <h2>DATE DE NAISSANCE</h2>
+                        <p><%=User.date_naissance.toLocaleDateString() %></p>
+                    </div>
+                    <div class="colonne-info">
+                        <h2>SEXE</h2>
+                        <p><%=User.sexe %></p>
+                    </div>
+                    <div class="colonne-info">
+                         <h2>Adresse</h2>
+                         <p><%=User.domicile %></p>
+                     </div>
+                    
+                </div>
+
+
+                <div class="basic-info">
+                   <div class="colonne-info">
+                        <h2>E-MAIL</h2>
+                        <p><%=User.email %></p>
+                    </div>
+                    <div class="colonne-info">
+                        <h2>N° DE TELEPHONE</h2>
+                        <p><%=User.telephone %></p>
+                    </div>
+                </div>
+                <div class="maj-profil">
+                     <a href="/fulltang/V0/receptionnist/modifier_profil/">Modifer profil</a>
+                     <a href="/fulltang/V0/receptionnist/profil/password">Modifier mot de passe</a>
+                </div>
+
+            </div>
+           
+        </div>
+         
+    </div>
+   
+</body>
+</html>
+
+
+

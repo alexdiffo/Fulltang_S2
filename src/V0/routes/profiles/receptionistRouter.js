@@ -1,11 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
-const app = express()
-const http=require('http')
-const server=http.createServer(app)
-const {Server}= require("socket.io")
-const io = new Server(server)
+const io=require('../../../../index')
 
 const Patient = require('../../models/Patient')
 const Consultation = require('../../models/Consultation')
@@ -13,23 +8,31 @@ const Parametre = require('../../models/Parametres')
 const Examen = require('../../models/Examen')
 const Medicament = require('../../models/Medicament')
 const { Op } = require('sequelize')
-const { Socket } = require('dgram')
+const Personnel = require('../../models/Personnel')
+
 
 
 router.use(express.json())
 
 router.use((req,res,next)=>{
-    if(req.session.profil!="receptionnist"){ 
-      res.redirect("/fulltang/V0/"+req.session.profil)
+    if(req.session.user.specialite!="receptionnist"){
+        if(["cashier","administrator","labtechnician"].includes(req.session.user.specialite)){ 
+            res.redirect("/fulltang/V0/"+req.session.user.specialite)
+          }else{
+              res.redirect("/fulltang/V0/doctor")
+          }
+      
     }else{
         next()
     }
 })
 
+
+
 // all receptionnist routes implemented here
 
 //get all patients
-router.get('/',  async (req, res)=>{
+.get('/',  async (req, res)=>{
     const patients = await Patient.findAll({ order: [["id","DESC"]],})
     res.render("receptionniste/patientList",{patient: patients})
     
@@ -38,7 +41,7 @@ router.get('/',  async (req, res)=>{
 //supprimer un patient  [uniquement si le patient n'a pas d'historique de prise en charge]
 // prevoir une requete pr le cas echeant
 
-router.post ('/',  async (req, res)=>{
+.post ('/',  async (req, res)=>{
 
     const id=req.body.id
     
@@ -149,10 +152,18 @@ router.post ('/',  async (req, res)=>{
     }else{
         
         data.rendez_vous="non"
-        
+
     }
-  
+
     await Consultation.create(data)
+
+    const list = await Consultation.findOne({ include: {model: Patient,attributes:["nom","prenom","sexe"],where:{id :data.patientId }, required: true}, order: [["id","DESC"]] }) 
+
+    if(list.rendez_vous=="oui"){
+        io.emit('consultation_paid', list )
+    }else{
+        io.emit('new_consultation', list)
+    }
 
     req.flash("positive","consultation creer avec succès")
     res.redirect("/fulltang/V0/receptionnist/consultation_history") 
@@ -181,6 +192,66 @@ router.post ('/',  async (req, res)=>{
         res.redirect("/fulltang/V0/receptionnist/consultation_history")
     }
 
+})
+
+//afficher profil
+.get('/profil',  async (req, res)=>{
+    const user = await Personnel.findOne({ where:{id: req.session.user.id } }) 
+    res.render("receptionniste/profil",{User: user})
+    
+})
+
+//modifier profil
+.get('/modifier_profil',  async (req, res)=>{
+    const user = await Personnel.findOne({ where:{id: req.session.user.id} }) 
+    res.render("receptionniste/modifier-profil",{User: user})
+    
+})
+.post('/modifier_profil',  async (req, res)=>{
+
+    let data=req.body
+    if(req.files){
+        let image=req.files.image
+        image.mv("./static/upload/"+image.name)
+        data.url_image="/upload/"+image.name 
+        req.session.user.url="/upload/"+image.name 
+    }
+   
+    await Personnel.update(data,{where: { id: req.session.user.id}})
+        req.flash("positive","profil modifier avec succès")
+        res.redirect("/fulltang/V0/receptionnist/profil")
+    
+    
+})
+.get('/profil/password',  async (req, res)=>{
+    
+    res.render("receptionniste/modifier-password")
+    
+})
+.post('/profil/password',  async (req, res)=>{
+    
+    let data= req.body
+    const user = await Personnel.findOne({ where:{id: req.session.user.id ,password: data.password}}) 
+
+    if(user){
+        
+        if(data.n_password == data.c_password){
+
+            await Personnel.update({password:data.n_password},{where: { id: req.session.user.id}})
+            req.flash("positive","mot de passe modifier avec succès")
+            res.redirect("/fulltang/V0/receptionnist/profil")
+
+        }else{
+            req.flash("negative","mot de passe de confirmation incorrect")
+            res.redirect("/fulltang/V0/receptionnist/profil/password")
+        }
+
+    }else{
+        req.flash("negative","mot de passe actuel incorrect")
+        res.redirect("/fulltang/V0/receptionnist/profil/password")
+    }
+
+    
 })
 
 

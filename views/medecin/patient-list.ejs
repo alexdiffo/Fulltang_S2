@@ -8,9 +8,11 @@
     <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
     <script type="text/javascript" src="/js/jquery.min.js" defer></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script  src='/js/script.js' defer></script>
     <script  src='/js/pagination.js' defer></script>
 </head>
+
 <body>
     <div class="preload"></div>
     <div class="main">
@@ -27,7 +29,8 @@
                         Bienvenu à la polyclinique Fulltang
                     </p>
                     <p>
-                        Caissier profil
+                        <span><%=user.specialite %> </span> profil
+                        
                     </p>
                     <p class="page-title">
                         Liste des consultations...
@@ -92,6 +95,37 @@
         </div>
          
     </div>
+    <script>
+        var  socket= io()
+        let table= document.querySelector(".table tbody")
+        let specialite="<%=user.specialite %>"
+       
+        socket.on('consultation_paid',(data)=>{
+
+            if(specialite==data.specialite){
+                let tr =document.createElement('tr')
+
+                tr.innerHTML=   "<td>"+data.id+"</td>"+
+                                "<td>"+data.patient.nom+"</td>"+
+                                "<td>"+data.patient.prenom+"</td>"+
+                                "<td>"+data.patient.sexe+"</td>"+
+                                "<td>"+data.specialite+"</td>"+
+                                "<td>"+data.rendez_vous+"</td>"+
+                                "<td>"+data.montant+"</td>"+
+                                "<td><a class='payement' style='background: #1d87b4;' href='/fulltang/V0/doctor/consultation/"+data.id+"'"+"> consulter <i class='fa-solid fa-briefcase-medical'></i></a> </td>"
+                
+                if(table.children.length > 0){
+                    table.insertBefore(tr,table.children[0])
+                }else{
+                    table.appendChild(tr)
+                }
+            }
+
+            
+
+        })
+
+    </script>
     
 </body>
 </html>

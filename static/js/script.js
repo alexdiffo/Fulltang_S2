@@ -177,3 +177,72 @@ if(section){
 
     })
 }
+
+
+////// change password
+
+let passwordForm=document.getElementById("change")
+
+if(passwordForm){
+
+    let n_password=document.getElementById("n_password")
+    let c_password=document.getElementById("c_password")
+
+
+   const verification=(e)=>{
+        let ps=p.cloneNode(true)
+
+        
+        if(e.target.nextElementSibling){
+            e.target.classList.remove("incorrect")
+            e.target.parentNode.removeChild(e.target.nextElementSibling)
+        }
+
+        if(e.target.value.length < 6){
+            e.target.classList.add("incorrect")
+            if(!e.target.nextElementSibling){
+                e.target.parentNode.appendChild(ps)
+            }
+            
+        
+            
+        
+        }
+   }
+
+    let p=document.createElement("p")
+    p.classList.add("consigne")
+    p.textContent="votre mot de passe doit avoir au minimum 6 caractères"
+
+    c_password.addEventListener("keyup", verification)
+    n_password.addEventListener("keyup", verification)
+
+
+    passwordForm.addEventListener('submit',function(e){
+        if(c_password.value.length < 6 || n_password.value.length < 6 ){
+            e.preventDefault()
+        }else{
+            
+            if(c_password.value!=n_password.value ){
+                e.preventDefault()
+                let ps=document.createElement("p")
+                ps.classList.add("consigne")
+                ps.textContent="votre mot de passe de confirmation est incorrect"
+                c_password.classList.add("incorrect")
+                if(!c_password.nextElementSibling){
+                    c_password.parentNode.appendChild(ps)
+                }
+            
+            }
+        }
+        
+    })
+
+}
+
+///// alert deconnexion
+var deconenxion=document.getElementById("deconnexion")
+
+deconenxion.addEventListener("click", function(){
+    alert("voulez vous vraiment vous déconnecter?")
+})

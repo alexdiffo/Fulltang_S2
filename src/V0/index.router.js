@@ -8,9 +8,10 @@ const SpecialistRouter = require('./routes/profiles/specalistRouter')
 const AdminRouter = require('./routes/admin/adminRouter')
 
 router.use((req,res,next)=>{
-    if(req.session.ID==undefined){ 
+    if(req.session.user==undefined){ 
       res.redirect("/fulltang/login")
     }else{
+        res.locals.user=req.session.user
         next()
     }
 });
@@ -25,6 +26,13 @@ router.use('/administrator' , AdminRouter)
 
 router.get('/', (req,res)=>{
     res.send(` Welcome to fulltang V0`)
+})
+
+//// deconnexion
+router.get('/deconnexion', (req,res)=>{
+
+    req.session.destroy()
+    res.redirect("/fulltang/login")
 })
 
 module.exports = router

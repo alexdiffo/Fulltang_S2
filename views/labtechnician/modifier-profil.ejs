@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>dashboard</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='/fontawesome/css/all.min.css'>
+    <script type="text/javascript" src="/js/jquery.min.js" defer></script>
+    <script src='/js/script.js' defer></script>
+</head>
+<body>
+    <div class="preload"></div>
+    <div class="main">
+        
+        <%- include("leftBar") %>
+
+        <div class="right-container">
+            
+            <%- include("header") %>
+            
+            <div class="content">
+                <div class="top-content">
+                    <p class="welcome">
+                        Bienvenu à la polyclinique Fulltang
+                    </p>
+                    <p>
+                        Labtechnician profil
+                    </p>
+                    <p class="page-title">
+                        Modifier profil...
+                    </p>
+                </div>
+                <form method="post" class="model-form" enctype="multipart/form-data" >
+                    <div class="model-title">
+                        Modifier profil
+                    </div>
+                    <div class="upload">
+                        <img src="<%=User.url_image%>" alt="erreur"/>
+                        <i class="fa-solid fa-camera"></i>
+                        <input type="file" accept="image/*" name="image" />
+                    </div>
+                    
+                    <div class="double-row">
+                        <div>
+                            <label>Nom</label>
+                            <input class="focus" type="text" value="<%=User.nom%>" name="nom" required/>
+                        </div>
+                        <div>
+                            <label>Prénom</label>
+                            <input class="focus" type="text" value="<%=User.prenom%>" name="prenom" required/>
+                        </div>
+                    </div>
+                    <div class="sigle-row">
+                        <div>
+                            <label>Date de naissance</label>
+                            <input class="focus" type="date" name="date_naissance" value="<%=User.date_naissance.toISOString().split('T')[0] %>" max="<%=new Date().toISOString().split('T')[0] %>" required />
+                        </div>
+                       
+                    </div>
+                    <div class="sigle-row">
+                        <div>
+                            <label>Sexe</label>
+                            <select class="focus" name="sexe" required  >
+                                <option  disabled value="" style=" color: black ; font-weight: bold"></option>
+                                <% if(User.sexe=="Masculin"){ %>
+                                    <option selected value="Masculin">Masculin</option>
+                                    <option value="Féminin">Féminin</option>
+                                <% } else { %>
+                                    <option  value="Masculin">Masculin</option>
+                                    <option selected value="Féminin">Féminin</option>
+                                <% } %>
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="double-row">
+                        <div>
+                            <label>Email</label>
+                            <input class="focus" type="email" value="<%=User.email %>" name="email"  required/>
+                        </div>
+                        <div>
+                            <label>N° téléphone</label>
+                            <input class="focus" type="number" value="<%=User.telephone %>" name="telephone" required/>
+                        </div>
+                    </div>
+                    <div class="sigle-row">
+                        
+                            <div>
+                                <label>Adresse</label>
+                                <input class="focus" type="text" value="<%=User.domicile %>" name="domicile" required/>
+                            </div>
+                            
+                    </div>
+                    
+                    <input  type="submit" value="enregistrer"/>
+                </form>
+                
+            </div>
+        </div>
+         
+    </div>
+
+    <script>
+        var img=document.querySelector(".upload img")
+        var src= img.getAttribute('src')
+        var file=document.querySelector("input[type='file']")
+        file.addEventListener("change",function(){
+            const[picture]=this.files
+            if(picture){
+                img.setAttribute("src",URL.createObjectURL(picture))
+                
+            }
+            else{
+                img.setAttribute("src",src)
+            }
+        })
+        
+    </script>
+    
+</body>
+</html>

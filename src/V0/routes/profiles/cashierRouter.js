@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const io=require('../../../../index')
+
 const Patient = require('../../models/Patient')
+const Personnel = require('../../models/Personnel')
 const Consultation = require('../../models/Consultation')
 const Resultat = require('../../models/Resultat')
 const Examen = require('../../models/Examen')
@@ -11,8 +14,13 @@ const { Op } = require('sequelize')
 router.use(express.json())
 
 router.use((req,res,next)=>{
-    if(req.session.profil!="cashier"){ 
-      res.redirect("/fulltang/V0/"+req.session.profil)
+    if(req.session.user.specialite!="cashier"){ 
+        if(["receptionnist","administrator","labtechnician"].includes(req.session.user.specialite)){ 
+            res.redirect("/fulltang/V0/"+req.session.user.specialite)
+          }else{
+              res.redirect("/fulltang/V0/doctor")
+          }  
+
     }else{
         next()
     }
@@ -47,6 +55,12 @@ router.use((req,res,next)=>{
  .post('/payer/:id', async(req, res)=>{
     const requestedID = req.params.id
     await Consultation.update({paye: "payer"},{where: { id: requestedID }}) 
+
+    //socket
+    data= await Consultation.findOne({ include: {model: Patient,attributes:["nom","prenom","sexe"], required: true}, where: {id: requestedID} }) 
+
+    io.emit('consultation_paid', data)
+     
     req.flash("positive","payement effectué avec succès")
     res.redirect("/fulltang/V0/cashier/consultation_paid") 
 })
@@ -151,5 +165,66 @@ router.use((req,res,next)=>{
     const list = await Patient.findAll({ include: {model: Consultation, where:{id :{ [Op.or]:f} },attributes: ["id","observation"],required: true},attributes: ["nom","prenom"]}) 
     res.send(list)
 })
+//afficher profil
+.get('/profil',  async (req, res)=>{
+    const user = await Personnel.findOne({ where:{id: req.session.user.id } }) 
+    res.render("caissier/profil",{User: user})
+    
+})
+
+//modifier profil
+.get('/modifier_profil',  async (req, res)=>{
+    const user = await Personnel.findOne({ where:{id: req.session.user.id} }) 
+    res.render("caissier/modifier-profil",{User: user})
+    
+})
+.post('/modifier_profil',  async (req, res)=>{
+
+    let data=req.body
+    if(req.files){
+        let image=req.files.image
+        image.mv("./static/upload/"+image.name)
+        data.url_image="/upload/"+image.name 
+        req.session.user.url="/upload/"+image.name 
+    }
+   
+    await Personnel.update(data,{where: { id: req.session.user.id}})
+        req.flash("positive","profil modifier avec succès")
+        res.redirect("/fulltang/V0/cashier/profil")
+    
+    
+})
+
+.get('/profil/password',  async (req, res)=>{
+    
+    res.render("caissier/modifier-password")
+    
+})
+.post('/profil/password',  async (req, res)=>{
+    
+    let data= req.body
+    const user = await Personnel.findOne({ where:{id: req.session.user.id ,password: data.password}}) 
+
+    if(user){
+        
+        if(data.n_password == data.c_password){
+
+            await Personnel.update({password:data.n_password},{where: { id: req.session.user.id}})
+            req.flash("positive","mot de passe modifier avec succès")
+            res.redirect("/fulltang/V0/cashier/profil")
+
+        }else{
+            req.flash("negative","mot de passe de confirmation incorrect")
+            res.redirect("/fulltang/V0/cashier/profil/password")
+        }
+
+    }else{
+        req.flash("negative","mot de passe actuel incorrect")
+        res.redirect("/fulltang/V0/cashier/profil/password")
+    }
+
+    
+})
+
 
 module.exports = router

@@ -45,18 +45,19 @@ div.invisible{
 
 .profil{
     margin-right: 115px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
     position: absolute;
     right: 0;
+}
+.profil a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 .profil-image{
     height: 45px;
     width: 45px;
-    background: #7fb1e9;
     border-radius: 50%;
-    border: solid 1px #ffffff;
+
 }
 .profil p{
     margin-right: 15px;
@@ -116,12 +117,14 @@ div.invisible{
 .grade p:nth-child(2){
     font-size: 16px;
     font-weight: bold;
+    text-transform: capitalize;
 }
 .outside a{
     text-decoration: none;
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
+    color: white;
 }
 .outside i{
     padding-right: 5px;
@@ -182,6 +185,9 @@ ul.height{
 }
 .top-content p{
     padding-bottom: 5px;
+}
+.top-content span{
+    text-transform: capitalize;
 }
 .welcome{
     font-size: 13px;
@@ -414,6 +420,19 @@ input[type="date"], select{
     align-items: center;
     font-size: 18px;
 }
+.user-image{
+    height: 158px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 45px;
+}
+.user-image img{
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 6px -2px black;
+}
 .basic-info{
     max-width: 740px;
     width: 85%;
@@ -455,6 +474,7 @@ input[type="date"], select{
     text-align: center;
     padding: 10px 0;
     cursor: pointer;
+    width: 50%;
 }
 .mWindow{
     position: fixed;
@@ -809,8 +829,58 @@ form.consultation{
     letter-spacing: 37px;
     transform: translateY(135%);
 }
-
-
+.upload{
+    padding: 50px 0;
+    margin: auto;
+    width: max-content;
+    position: relative;
+}
+.upload img{
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    outline: solid 7px #58a8c9;
+}
+.upload input[type="file"]{
+    position: absolute;
+    padding: 0;
+    width: 33px;
+    height: 33px;
+    outline: none;
+    border-radius: 50%;
+    bottom: 60px;
+    right: -5px;
+}
+.upload input[type="file"]::-webkit-file-upload-button{
+    background: #58a8c9;
+    height: 55px;
+    border: none;
+    cursor: pointer;
+    color: #58a8c9;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 10px 30px;
+    margin-right: 30px;
+    content: "codd";
+}
+.upload i{
+    position: absolute;
+    bottom: 68px;
+    right: 3px;
+    z-index: 1;
+    color: white;
+    pointer-events: none;
+}
+.model-form .incorrect{
+    outline: 1px solid #df4a4a;
+    box-shadow: 0 0 6px 0px #df4a4a;
+    background: #fffafa;
+}
+.consigne{
+    color: #e01717;
+    font-size: 14px;
+    margin-top: 5px;
+}
 
 
 

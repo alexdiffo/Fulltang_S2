@@ -5,16 +5,29 @@ const Examen = require('../../models/Examen')
 const Resultat = require('../../models/Resultat')
 const Medicament = require('../../models/Medicament')
 const Prescription = require('../../models/Prescription')
+const { Op } = require('sequelize')
 
 
 router.use(express.json())
 
+router.use((req,res,next)=>{
+    if(req.session.user.specialite!="administrator"){ 
+        if(["cashier","receptionnist","labtechnician"].includes(req.session.user.specialite)){ 
+            res.redirect("/fulltang/V0/"+req.session.user.specialite)
+          }else{
+              res.redirect("/fulltang/V0/doctor")
+          }  
+            
+    }else{
+        next()
+    }
+})
 
 // all administrator routes implemented here...
 
 //liste du personnels
 .get('/',  async (req, res)=>{
-    const list = await Personnel.findAll({order: [["id","DESC"]] }) 
+    const list = await Personnel.findAll({where:{specialite:{[Op.ne]:"administrator"} },order: [["id","DESC"]] }) 
     res.render("administrator/personnel-list",{ personnel: list})    
 })
 
@@ -27,6 +40,7 @@ router.use(express.json())
 
     let personnel=req.body
     personnel.password="fultang"
+    personnel.url_image="/upload/avatar.jpg"
 
     await Personnel.create(personnel)
     req.flash("positive","nouveau personnel ajouter avec succès")
@@ -178,7 +192,66 @@ router.use(express.json())
 
 })
 
+//afficher profil
+.get('/profil',  async (req, res)=>{
+    const user = await Personnel.findOne({ where:{id: req.session.user.id } }) 
+    res.render("administrator/profil",{User: user})
+    
+})
 
+//modifier profil
+.get('/modifier_profil',  async (req, res)=>{
+    const user = await Personnel.findOne({ where:{id: req.session.user.id} }) 
+    res.render("administrator/modifier-profil",{User: user})
+    
+})
+.post('/modifier_profil',  async (req, res)=>{
+
+    let data=req.body
+    if(req.files){
+        let image=req.files.image
+        image.mv("./static/upload/"+image.name)
+        data.url_image="/upload/"+image.name 
+        req.session.user.url="/upload/"+image.name 
+    }
+   
+    await Personnel.update(data,{where: { id: req.session.user.id}})
+        req.flash("positive","profil modifier avec succès")
+        res.redirect("/fulltang/V0/administrator/profil")
+    
+    
+})
+
+.get('/profil/password',  async (req, res)=>{
+    
+    res.render("administrator/modifier-password")
+    
+})
+.post('/profil/password',  async (req, res)=>{
+    
+    let data= req.body
+    const user = await Personnel.findOne({ where:{id: req.session.user.id ,password: data.password}}) 
+
+    if(user){
+        
+        if(data.n_password == data.c_password){
+
+            await Personnel.update({password:data.n_password},{where: { id: req.session.user.id}})
+            req.flash("positive","mot de passe modifier avec succès")
+            res.redirect("/fulltang/V0/administrator/profil")
+
+        }else{
+            req.flash("negative","mot de passe de confirmation incorrect")
+            res.redirect("/fulltang/V0/administrator/profil/password")
+        }
+
+    }else{
+        req.flash("negative","mot de passe actuel incorrect")
+        res.redirect("/fulltang/V0/administrator/profil/password")
+    }
+
+    
+})
 
 
 
