@@ -41,9 +41,26 @@ app.use(fileUploader({
 
 
 const sequelize = require('./src/V0/repository/database');
-sequelize.sync({alter: false}).then(()=>console.log('database is up and running!'))
+sequelize.sync({alter: false}).then(()=>{
+  const [admin, created_at] = Personnel.findOrCreate({
+    where: {specialite: "administrator"},
+    defaults: {
+      specialite: 'administrator',
+      nom: 'admin',
+      email: 'admin@fulltang.org',
+      password: 'admin',
+      date_naissance:0,
+      sexe: 'Masculin',
+      domicile: 'null'
+    }
+  })
+  if(created_at) {
+    console.log(`Admin auto-created with credentials : {email: ${admin.email}, password:${admin.password}}`)
+  }
+  console.log('database is up and running!')
+}).then(()=>console.log('database is up and running!'))
 .catch((err)=>{
-    console.log('Error connecting database');
+    console.log('Error connecting database' + err);
 })
 
 
