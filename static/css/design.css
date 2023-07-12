@@ -5,6 +5,7 @@
 }
 .title{
   margin-bottom: 40px;
+  color: white;
 }
 .form-control:focus{
   border: solid 2px #2186d4;

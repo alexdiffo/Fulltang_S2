@@ -14,6 +14,7 @@ const message=require("./middleware/message")
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const Personnel = require('./src/V0/models/Personnel')
+const Examen= require('./src/V0/models/Examen')
 
 
 
@@ -25,7 +26,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static("static"))
 app.use(session({
-    secret: 'keyboard cat',
+  
+  secret: 'secretkeyfffff',
     resave: false,
     
     saveUninitialized: true,
@@ -41,7 +43,7 @@ app.use(fileUploader({
 
 
 const sequelize = require('./src/V0/repository/database');
-sequelize.sync({alter: false}).then(()=>console.log('database is up and running!'))
+sequelize.sync({alter: true}).then(()=>console.log('database is up and running!'))
 .catch((err)=>{
     console.log('Error connecting database');
 })
@@ -64,6 +66,8 @@ io.on('connection', (socket) =>{
 app.get('/fulltang/login',async (req,res)=>{
 
   res.render("login")
+
+  
   
 })
 

@@ -9,6 +9,19 @@ const { Op } = require('sequelize')
 
 router.use(express.json())
 
+router.use((req,res,next)=>{
+    if(req.session.user.specialite!="labtechnician"){ 
+        if(["cashier","receptionnist","administrator"].includes(req.session.user.specialite)){ 
+            res.redirect("/fulltang/V0/"+req.session.user.specialite)
+          }else{
+              res.redirect("/fulltang/V0/doctor")
+          }  
+            
+    }else{
+        next()
+    }
+})
+
 // all labtech routes implemented here...
 
 
@@ -76,7 +89,7 @@ router.use(express.json())
     }
    
     await Personnel.update(data,{where: { id: req.session.user.id}})
-        req.flash("positive","profil modifier avec succès")
+        req.flash("positive","profil modifié avec succès")
         res.redirect("/fulltang/V0/labtechnician/profil")
     
     
@@ -96,7 +109,7 @@ router.use(express.json())
         if(data.n_password == data.c_password){
 
             await Personnel.update({password:data.n_password},{where: { id: req.session.user.id}})
-            req.flash("positive","mot de passe modifier avec succès")
+            req.flash("positive","mot de passe modifié avec succès")
             res.redirect("/fulltang/V0/labtechnician/profil")
 
         }else{

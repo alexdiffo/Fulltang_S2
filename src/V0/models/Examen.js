@@ -9,6 +9,9 @@ Examen.init({
     nom:{
         type: DataTypes.TEXT        
     },
+    prix:{
+        type: DataTypes.INTEGER        
+    },
     libelle:{
         type: DataTypes.TEXT        
     },

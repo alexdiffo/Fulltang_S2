@@ -43,7 +43,7 @@ router.use((req,res,next)=>{
     personnel.url_image="/upload/avatar.jpg"
 
     await Personnel.create(personnel)
-    req.flash("positive","nouveau personnel ajouter avec succès")
+    req.flash("positive","nouveau personnel ajouté avec succès")
     res.redirect("/fulltang/V0/administrator") 
 })
 
@@ -71,7 +71,7 @@ router.use((req,res,next)=>{
 
 .post('/add_examen',  async (req, res)=>{
     await Examen.create(req.body)
-    req.flash("positive","nouvel examen ajouter avec succès")
+    req.flash("positive","nouvel examen ajouté avec succès")
     res.redirect("/fulltang/V0/administrator/examen_list") 
 })
 
@@ -138,7 +138,7 @@ router.use((req,res,next)=>{
 
 .post('/add_medicament',  async (req, res)=>{
     await Medicament.create(req.body)
-    req.flash("positive","nouveau medicament ajouter avec succès")
+    req.flash("positive","nouveau medicament ajouté avec succès")
     res.redirect("/fulltang/V0/administrator/medicament_list") 
 })
 
@@ -216,7 +216,7 @@ router.use((req,res,next)=>{
     }
    
     await Personnel.update(data,{where: { id: req.session.user.id}})
-        req.flash("positive","profil modifier avec succès")
+        req.flash("positive","profil modifié avec succès")
         res.redirect("/fulltang/V0/administrator/profil")
     
     
@@ -237,7 +237,7 @@ router.use((req,res,next)=>{
         if(data.n_password == data.c_password){
 
             await Personnel.update({password:data.n_password},{where: { id: req.session.user.id}})
-            req.flash("positive","mot de passe modifier avec succès")
+            req.flash("positive","mot de passe modifié avec succès")
             res.redirect("/fulltang/V0/administrator/profil")
 
         }else{

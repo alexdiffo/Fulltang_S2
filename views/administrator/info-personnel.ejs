@@ -32,14 +32,10 @@
                         information du personnel...
                     </p>
                 </div>
-                <% if(locals.message){ %>
-                    <div class="<%='notification '+type %>" >
-                        <p>
-                            <%=message %>
-                        </p>
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
-                <% } %>
+                
+                <div class="user-image">
+                    <img src="<%=personnel.url_image%>" alt="erreur" >
+                </div>
                 <div class="basic-info">
                     <div class="colonne-info">
                         <h2>iD</h2>
@@ -73,11 +69,8 @@
                     <div class="colonne-info">
                          <h2>Adresse</h2>
                          <p><%=personnel.domicile %></p>
-                     </div>
-                     <div class="colonne-info">
-                        <h2>N° DE CNI</h2>
-                        <p><%=personnel.CNI %></p>
                     </div>
+                     
                  </div>
 
                 <div class="basic-info">

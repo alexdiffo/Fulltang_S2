@@ -34,6 +34,14 @@
                     </p>
                 </div>
                 <div class="patient-list">
+                    <% if(locals.message){ %>
+                        <div class="<%='notification '+type %>">
+                            <p>
+                                <%=message %>
+                            </p>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    <% } %>
                     <div class="search">
                         <div>
                             <input type="text" placeholder="search">
@@ -48,7 +56,7 @@
                                     <th>patient</th>
                                     <th>Examen</th>
                                     <th>montant</th>
-                                    <th>description</th>
+                                    <th>Resultat</th>
                                 </tr>
                             </thead>
                             <tbody>

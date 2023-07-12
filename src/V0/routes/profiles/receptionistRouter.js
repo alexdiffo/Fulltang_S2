@@ -71,7 +71,7 @@ router.use((req,res,next)=>{
 .post('/register',  async (req, res)=>{
 
     await Patient.create(req.body)
-    req.flash("positive","nouveau patient ajouter")
+    req.flash("positive","nouveau patient ajouté")
     res.redirect("/fulltang/V0/receptionnist") 
 })
 
@@ -101,7 +101,7 @@ router.use((req,res,next)=>{
     }
     else{
         await Patient.destroy({ where: {id: id}})
-        req.flash("positive","le patient a été supprimer")
+        req.flash("positive","le patient a été supprimé")
         res.redirect("/fulltang/V0/receptionnist") 
 
     }
@@ -134,7 +134,7 @@ router.use((req,res,next)=>{
     const requestedID = req.params.id
     const patient = await Patient.findOne({where: {id:requestedID}})
     if(patient){
-        const carnet = await Consultation.findAll({ include:[{model: Examen,attributes: ["nom"]},{model: Medicament,attributes: ["nom"]},{model: Parametre, required: true}],attributes:["date","observation","diagnostic"] ,where:{ date: {[Op.not]: null},patientId: patient.id},order: [["id","DESC"]] }) 
+        const carnet = await Consultation.findAll({ include:[{model: Examen,attributes: ["nom"]},{model: Personnel,attributes: ["nom"],required: true},{model: Medicament,attributes: ["nom"]},{model: Parametre, required: true}],attributes:["date","observation","diagnostic"] ,where:{ date: {[Op.not]: null},patientId: requestedID},order: [["id","DESC"]] }) 
         res.render("receptionniste/new-consultation",{patient: patient, carnet: carnet})
     }
     else{
@@ -165,7 +165,7 @@ router.use((req,res,next)=>{
         io.emit('new_consultation', list)
     }
 
-    req.flash("positive","consultation creer avec succès")
+    req.flash("positive","consultation creé avec succès")
     res.redirect("/fulltang/V0/receptionnist/consultation_history") 
 
 })
@@ -188,7 +188,7 @@ router.use((req,res,next)=>{
         res.redirect("/fulltang/V0/receptionnist/consultation_history")
     }else{
         await Consultation.destroy({ where: {id: id}})
-        req.flash("positive","consultation effectué avc succès")
+        req.flash("positive","consultation effectué avec succès")
         res.redirect("/fulltang/V0/receptionnist/consultation_history")
     }
 
@@ -218,7 +218,7 @@ router.use((req,res,next)=>{
     }
    
     await Personnel.update(data,{where: { id: req.session.user.id}})
-        req.flash("positive","profil modifier avec succès")
+        req.flash("positive","profil modifié avec succès")
         res.redirect("/fulltang/V0/receptionnist/profil")
     
     
@@ -238,7 +238,7 @@ router.use((req,res,next)=>{
         if(data.n_password == data.c_password){
 
             await Personnel.update({password:data.n_password},{where: { id: req.session.user.id}})
-            req.flash("positive","mot de passe modifier avec succès")
+            req.flash("positive","mot de passe modifié avec succès")
             res.redirect("/fulltang/V0/receptionnist/profil")
 
         }else{

@@ -33,6 +33,14 @@
                         Historiques des consultations...
                     </p>
                 </div>
+                <% if(locals.message){ %>
+                    <div class="<%='notification '+type %>" >
+                        <p>
+                            <%=message %>
+                        </p>
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                <% } %>
                 <div class="patient-list">
                     <div class="search">
                         <div>

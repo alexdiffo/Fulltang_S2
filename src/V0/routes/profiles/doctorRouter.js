@@ -64,7 +64,7 @@ router.use((req,res,next)=>{
         rhesus: req.body.rhesus,
     })
 
-    await Consultation.update({date: new Date(), diagnostic: req.body.diagnostic, observation: req.body.observation, personnelId: req.session.ID},{where: { id: id }})
+    await Consultation.update({date: new Date(), diagnostic: req.body.diagnostic, observation: req.body.observation, personnelId: req.session.user.id},{where: { id: id }})
 
     if(req.body.medicament){
         Array.from(req.body.medicament).forEach( async (i)=> {
@@ -84,13 +84,14 @@ router.use((req,res,next)=>{
         });
     }
 
-    req.flash("positive","consultation enregistrer avec succès")
+    req.flash("positive","consultation enregistré avec succès")
     res.redirect("/fulltang/V0/doctor/consultation_history")
 
 })
 
 
 .get('/consultation_history',  async (req, res)=>{
+
     const list = await Consultation.findAll({ include: {model: Patient,required: true}, where: {date: {[Op.not]: null} },order: [["id","DESC"]] }) 
     res.render("medecin/consultation-history",{ consultation: list})    
 
@@ -135,7 +136,7 @@ router.use((req,res,next)=>{
     }
    
     await Personnel.update(data,{where: { id: req.session.user.id}})
-        req.flash("positive","profil modifier avec succès")
+        req.flash("positive","profil modifié avec succès")
         res.redirect("/fulltang/V0/doctor/profil")
     
     
@@ -156,7 +157,7 @@ router.use((req,res,next)=>{
         if(data.n_password == data.c_password){
 
             await Personnel.update({password:data.n_password},{where: { id: req.session.user.id}})
-            req.flash("positive","mot de passe modifier avec succès")
+            req.flash("positive","mot de passe modifié avec succès")
             res.redirect("/fulltang/V0/doctor/profil")
 
         }else{

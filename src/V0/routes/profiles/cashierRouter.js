@@ -189,7 +189,7 @@ router.use((req,res,next)=>{
     }
    
     await Personnel.update(data,{where: { id: req.session.user.id}})
-        req.flash("positive","profil modifier avec succès")
+        req.flash("positive","profil modifié avec succès")
         res.redirect("/fulltang/V0/cashier/profil")
     
     
@@ -210,7 +210,7 @@ router.use((req,res,next)=>{
         if(data.n_password == data.c_password){
 
             await Personnel.update({password:data.n_password},{where: { id: req.session.user.id}})
-            req.flash("positive","mot de passe modifier avec succès")
+            req.flash("positive","mot de passe modifié avec succès")
             res.redirect("/fulltang/V0/cashier/profil")
 
         }else{

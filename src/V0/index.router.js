@@ -25,7 +25,7 @@ router.use('/administrator' , AdminRouter)
 
 
 router.get('/', (req,res)=>{
-    res.send(` Welcome to fulltang V0`)
+    res.json({acceuil:` Welcome to fulltang V0`})
 })
 
 //// deconnexion
